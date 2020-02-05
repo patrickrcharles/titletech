@@ -13,6 +13,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 public class StageTestData {
@@ -40,20 +42,38 @@ public class StageTestData {
         // get jsonArrays of test data for parsing/insertion to database
         JSONArray personList = getJsonArrayFromFile(jsonNamesPath);
         JSONArray parcelList = getJsonArrayFromFile(jsonAddressesPath);
+        JSONArray boughtSoldTimestampsList = getJsonArrayFromFile(jsonBoughtSoldTimestampsPath);
+
+        // timestamps is going to a problem
+        /*
+        first need to create an array that makes sure data is organized by lowest date first
+        identify parcels with multiple owners
+        apply timestamps to that
+         */
 
         try (Reader reader = new FileReader(jsonAddressesPath)) {
             // insert person data into array
             // personIndex is for keeping track of the index of the person object in the jsonArray
-            final int[] personIndex = new int[2000];
-            personList.forEach(person -> {
-                InsertPersonObjectToDB((JSONObject) person, personIndex[0]);
-                // increment for next person.
-                personIndex[0]++;
+            boughtSoldTimestampsList.forEach(timestamp -> {
+                try {
+                    InsertBoughtSoldTimeStampsObjectToDB((JSONObject) timestamp);
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
             });
-            // insert Parcel data into database
-            parcelList.forEach(parcel -> {
-                InsertParcelObjectToDB((JSONObject) parcel);
-            });
+
+//            final int[] personIndex = new int[2000];
+//            personList.forEach(person -> {
+//                InsertPersonObjectToDB((JSONObject) person, personIndex[0]);
+//                // increment for next person.
+//                personIndex[0]++;
+//            });
+//            // insert Parcel data into database
+//            parcelList.forEach(parcel -> {
+//                InsertParcelObjectToDB((JSONObject) parcel);
+//            });
+
+
 
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -145,7 +165,26 @@ public class StageTestData {
         }
     }
 
-    private static int[] getShuffledIntegerArray(int size) {
+    private static void InsertBoughtSoldTimeStampsObjectToDB(JSONObject object) throws java.text.ParseException {
+
+        String datePurchased = (String) object.get("date_purchased");
+        String dateSold = (String) object.get("date_sold");
+
+        String linebreak = null;
+
+        Date purchased=new SimpleDateFormat("dd/MM/yyyy").parse(datePurchased);
+        Date sold=new SimpleDateFormat("dd/MM/yyyy").parse(dateSold);
+
+        if(purchased.before(sold)){
+            System.out.print("\n XXX - datePurchased is before dateSold");
+
+            // todo: swap values on this condition
+        }
+        else
+            System.out.print("\n YYY - datePurchased is after dateSold");
+
+    }
+        private static int[] getShuffledIntegerArray(int size) {
 
         Random rd = new Random(); // creating Random object
         int[] parcelids;
