@@ -51,8 +51,8 @@ public class StageTestData {
                 personIndex[0]++;
             });
             // insert Parcel data into database
-            personList.forEach(person -> {
-                InsertParcelObjectToDB((JSONObject) person);
+            parcelList.forEach(parcel -> {
+                InsertParcelObjectToDB((JSONObject) parcel);
             });
 
         } catch (IOException exception) {
