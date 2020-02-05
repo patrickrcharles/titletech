@@ -27,6 +27,7 @@ public class StageTestData {
     protected static String insertPersonDataQuery =
             "INSERT INTO person (first_name, middle_name, last_name, parcelid) values (?, ?, ?, ?)";
     protected static String insertParcelDataQuery = "INSERT INTO parcel (street, city, state, zip_code) values (?, ?, ?,?)";
+    protected static String insertTimestampDataQuery = "INSERT INTO person (date_purchased, date_sold) values (?, ?)";
 
     public static void main(String[] args) throws URISyntaxException {
 
@@ -72,7 +73,6 @@ public class StageTestData {
 //            parcelList.forEach(parcel -> {
 //                InsertParcelObjectToDB((JSONObject) parcel);
 //            });
-
 
 
         } catch (IOException exception) {
@@ -170,21 +170,55 @@ public class StageTestData {
         String datePurchased = (String) object.get("date_purchased");
         String dateSold = (String) object.get("date_sold");
 
+        // needed to insert to database
+        java.sql.Date sqlDatePurchased = null;
+        java.sql.Date sqlDateSold = null;
+
         String linebreak = null;
 
-        Date purchased=new SimpleDateFormat("dd/MM/yyyy").parse(datePurchased);
-        Date sold=new SimpleDateFormat("dd/MM/yyyy").parse(dateSold);
+        Date purchased = new SimpleDateFormat("dd/MM/yyyy").parse(datePurchased);
+        Date sold = new SimpleDateFormat("dd/MM/yyyy").parse(dateSold);
 
-        if(purchased.before(sold)){
-            System.out.print("\n XXX - datePurchased is before dateSold");
+        if (purchased.after(sold)) {
+            System.out.print("\n XXX - datePurchased after before dateSold");
+            //copy original values
+            Date originalDatePurchased = purchased;
+            Date originalDateSold = sold;
+            //swap values
+            purchased = sold;
+            sold = originalDatePurchased;
 
-            // todo: swap values on this condition
+            //convert to sql Date
+            sqlDatePurchased = new java.sql.Date(purchased.getTime());
+            sqlDateSold = new java.sql.Date(sold.getTime());
+
+        }else {
+            sqlDatePurchased = new java.sql.Date(purchased.getTime());
+            sqlDateSold = new java.sql.Date(sold.getTime());
         }
-        else
-            System.out.print("\n YYY - datePurchased is after dateSold");
+        // next, insert into parcel table into database
+        // then, use parcelids to insert into personid
+        // test with maybe 10-20 first
+        try {
+            Connection conn = DriverManager.getConnection(url, user, password);
+
+            PreparedStatement statement = conn.prepareStatement(insertTimestampDataQuery);
+            statement.setDate(1, sqlDatePurchased);
+            statement.setDate(2, sqlDateSold);
+
+            int row = statement.executeUpdate();
+            if (row > 0) {
+                System.out.println("timestamp data entered successfully");
+            }
+            statement.close();
+            conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 
     }
-        private static int[] getShuffledIntegerArray(int size) {
+
+    private static int[] getShuffledIntegerArray(int size) {
 
         Random rd = new Random(); // creating Random object
         int[] parcelids;
