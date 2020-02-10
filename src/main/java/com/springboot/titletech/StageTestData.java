@@ -29,7 +29,7 @@ public class StageTestData {
     protected static String insertParcelDataQuery = "INSERT INTO parcel (street, city, state, zip_code) values (?, ?, ?,?)";
     protected static String insertTimestampDataQuery = "INSERT INTO person (date_purchased, date_sold) values (?, ?)";
 
-    public static void main(String[] args) throws URISyntaxException {
+    public static void main(String[] args) {
 
         // get json file paths from resource folder. this is good enough for now
         // todo: write a class to load properties file
@@ -52,32 +52,28 @@ public class StageTestData {
         apply timestamps to that
          */
 
-        try (Reader reader = new FileReader(jsonAddressesPath)) {
-            // insert person data into array
-            // personIndex is for keeping track of the index of the person object in the jsonArray
-            boughtSoldTimestampsList.forEach(timestamp -> {
-                try {
-                    InsertBoughtSoldTimeStampsObjectToDB((JSONObject) timestamp);
-                } catch (java.text.ParseException e) {
-                    e.printStackTrace();
-                }
+        // insert person data into array
+        // personIndex is for keeping track of the index of the person object in the jsonArray
+        assert boughtSoldTimestampsList != null;
+        boughtSoldTimestampsList.forEach((Object timestamp) -> {
+            try {
+                InsertBoughtSoldTimeStampsObjectToDB((JSONObject) timestamp);
+            } catch (java.text.ParseException e) {
+                e.printStackTrace();
+            }
+        });
+
+            final int[] personIndex = new int[2000];
+        assert personList != null;
+        personList.forEach((Object person) -> {
+                InsertPersonObjectToDB((JSONObject) person, personIndex[0]);
+                // increment for next person.
+                personIndex[0]++;
             });
-
-//            final int[] personIndex = new int[2000];
-//            personList.forEach(person -> {
-//                InsertPersonObjectToDB((JSONObject) person, personIndex[0]);
-//                // increment for next person.
-//                personIndex[0]++;
-//            });
-//            // insert Parcel data into database
-//            parcelList.forEach(parcel -> {
-//                InsertParcelObjectToDB((JSONObject) parcel);
-//            });
-
-
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
+            // insert Parcel data into database
+            parcelList.forEach(parcel -> {
+                InsertParcelObjectToDB((JSONObject) parcel);
+            });
     }
 
     private static JSONArray getJsonArrayFromFile(String jsonNamesPath) {
@@ -86,9 +82,8 @@ public class StageTestData {
         try (Reader reader = new FileReader(jsonNamesPath)) {
 
             Object obj = parser.parse(reader);
-            JSONArray jsonArray = (JSONArray) obj;
 
-            return jsonArray;
+            return (JSONArray) obj;
 
         } catch (IOException | ParseException exception) {
             exception.printStackTrace();
@@ -171,10 +166,10 @@ public class StageTestData {
         String dateSold = (String) object.get("date_sold");
 
         // needed to insert to database
-        java.sql.Date sqlDatePurchased = null;
-        java.sql.Date sqlDateSold = null;
+        java.sql.Date sqlDatePurchased;
+        java.sql.Date sqlDateSold;
 
-        String linebreak = null;
+        //String linebreak = null;
 
         Date purchased = new SimpleDateFormat("dd/MM/yyyy").parse(datePurchased);
         Date sold = new SimpleDateFormat("dd/MM/yyyy").parse(dateSold);
@@ -183,7 +178,7 @@ public class StageTestData {
             System.out.print("\n XXX - datePurchased after before dateSold");
             //copy original values
             Date originalDatePurchased = purchased;
-            Date originalDateSold = sold;
+            //Date originalDateSold = sold;
             //swap values
             purchased = sold;
             sold = originalDatePurchased;
@@ -215,7 +210,6 @@ public class StageTestData {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
     }
 
     private static int[] getShuffledIntegerArray(int size) {
