@@ -29,10 +29,6 @@ public class Person {
     @Column(name="dateSold")
     private String dateSold;
 
-    @Column(name="address")
-    private String address;
-
-
     // define constructors
     public Person() {
 
@@ -41,7 +37,6 @@ public class Person {
     public Person(String firstName, String lastName, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = address;
     }
 
     // define getter/setter
@@ -102,14 +97,6 @@ public class Person {
         this.dateSold = dateSold;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     @Override
     public String toString() {
         return "Person{" +
@@ -120,7 +107,6 @@ public class Person {
                 ", lastName='" + lastName + '\'' +
                 ", datePurchased='" + datePurchased + '\'' +
                 ", dateSold='" + dateSold + '\'' +
-                ", address='" + address + '\'' +
                 '}';
     }
 }
