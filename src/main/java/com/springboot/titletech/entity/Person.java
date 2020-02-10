@@ -23,10 +23,10 @@ public class Person {
     @Column(name="middle_name")
     private String lastName;
 
-    @Column(name="datePurchased")
+    @Column(name="date_purchased")
     private String datePurchased;
 
-    @Column(name="dateSold")
+    @Column(name="date_sold")
     private String dateSold;
 
     // define constructors

@@ -48,7 +48,7 @@ public class StageTestData {
         ClassLoader classLoader = StageTestData.class.getClassLoader();
         String jsonNamesPath = classLoader.getResource("names.json").getPath();
         String jsonAddressesPath = classLoader.getResource("addresses.json").getPath();
-        String jsonBoughtSoldTimestampsPath = classLoader.getResource("timestamps.json").getPath();
+//        String jsonBoughtSoldTimestampsPath = classLoader.getResource("timestamps.json").getPath();
 
         // get jsonArrays of test data for parsing/insertion to database
 //        JSONArray personList = getJsonArrayFromFile(jsonNamesPath);
