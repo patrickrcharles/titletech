@@ -5,13 +5,11 @@ import com.springboot.titletech.entity.Person;
 import java.util.List;
 
 public interface PersonDAO {
+    List<Person> findAll();
 
-	public List<Person> findAll();
-	
-	public Person findById(int theId);
-	
-	public void save(Person thePerson);
-	
-	public void deleteById(int theId);
-	
+    Person findById(int theId);
+
+    void save(Person person);
+
+    void deleteById(int theId);
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PersonDAOImpl implements PersonDAO {
 
-	// define field for entitymanager	
+	// define field for entitymanager
 	private EntityManager entityManager;
 		
 	// set up constructor injection
@@ -21,8 +21,8 @@ public class PersonDAOImpl implements PersonDAO {
 	public PersonDAOImpl(EntityManager theEntityManager) {
 		entityManager = theEntityManager;
 	}
-	
-	
+
+
 	@Override
 	public List<Person> findAll() {
 
@@ -57,13 +57,14 @@ public class PersonDAOImpl implements PersonDAO {
 
 
 	@Override
-	public void save(Person theEmployee) {
+	public void save(Person person) {
 
+		System.out.println("PersonDAOImpl :: save()");
 		// get the current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
 		
 		// save employee
-		currentSession.saveOrUpdate(theEmployee);
+		currentSession.saveOrUpdate(person);
 	}
 
 

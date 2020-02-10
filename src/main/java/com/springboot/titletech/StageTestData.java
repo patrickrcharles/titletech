@@ -1,5 +1,8 @@
 package com.springboot.titletech;
 
+import com.springboot.titletech.dao.PersonDAO;
+import com.springboot.titletech.dao.PersonDAOImpl;
+import com.springboot.titletech.entity.Parcel;
 import com.springboot.titletech.entity.Person;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -30,6 +33,11 @@ public class StageTestData {
             "INSERT INTO person (first_name, middle_name, last_name, date_purchased, date_sold, parcelid) values (?, ?, ?, ?,?,?)";
     protected static String insertParcelDataQuery = "INSERT INTO parcel (street, city, state, zip_code) values (?, ?, ?,?)";
     protected static String insertTimestampDataQuery = "INSERT INTO person (date_purchased, date_sold) values (?, ?)";
+    protected static String SOURCES_ALL = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+    protected static String SOURCES_NUMBERS = "1234567890";
+    protected static String SOURCES_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+    ;
 
     public static void main(String[] args) throws java.text.ParseException {
 
@@ -54,16 +62,21 @@ public class StageTestData {
         apply timestamps to that
          */
 
-        // generate test data
+        // generate/insert person test data
         int numOfPersonToGenerate = 100;
         ArrayList<Person> personList = new ArrayList<>();
         for (int j = 0; j < numOfPersonToGenerate; j++) {
             personList.add(generatePersonList(j+1));
         }
-
         InsertPersonToDB(personList);
 
-
+        // generate/insert parcel test data
+        int numOfParcelToGenerate = 100;
+        ArrayList<Parcel> parcelList = new ArrayList<>();
+        for (int j = 0; j < numOfParcelToGenerate; j++) {
+            parcelList.add(generateParcelList(j+1));
+        }
+        InsertParcelToDB(parcelList);
 
 
         // insert person data into array
@@ -101,36 +114,106 @@ public class StageTestData {
         //      insert person.name = parcel.currentOwner.
     }
 
+    private static void InsertParcelToDB(ArrayList<Parcel> parcelList) {
+
+        try {
+
+            Connection conn = DriverManager.getConnection(url, user, password);
+            for (Parcel p : parcelList
+            ) {
+                PreparedStatement statement = conn.prepareStatement(insertParcelDataQuery);
+                statement.setString(1, p.getStreet());
+                statement.setString(2, p.getCity());
+                statement.setString(3, p.getState());
+                statement.setString(4, p.getZipCode());
+
+                int row = statement.executeUpdate();
+                if (row > 0) {
+                    System.out.println("Parcel data entered successfully");
+                }
+                statement.close();
+            }
+            conn.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private static Parcel generateParcelList(int index) {
+
+        String street = generateString(new Random(), SOURCES_NUMBERS, 5) + " " +
+                generateString(new Random(), SOURCES_LETTERS, 7);
+        String city = generateString(new Random(), SOURCES_LETTERS, 10);
+        String state = generateString(new Random(), SOURCES_LETTERS, 10);
+        String zipCode = generateString(new Random(), SOURCES_NUMBERS, 5);
+
+        Parcel parcel = new Parcel();
+        parcel.setId(index);
+        parcel.setStreet(street);
+        parcel.setCity(city);
+        parcel.setState(state);
+        parcel.setZipCode(zipCode);
+
+        return parcel;
+    }
+
     private static Person generatePersonList(int index) throws java.text.ParseException {
 
-        String SOURCES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        String firstName = generateString(new Random(), SOURCES_ALL, 10);
+        String middleName = generateString(new Random(), SOURCES_ALL, 10);
+        String lastName = generateString(new Random(), SOURCES_ALL, 10);
 
-        String firstName = generateString(new Random(), SOURCES, 10);
-        String middleName = generateString(new Random(), SOURCES, 10);
-        String lastName = generateString(new Random(), SOURCES, 10);
         // needed to insert to database
         java.sql.Date sqlDatePurchased;
         java.sql.Date sqlDateSold;
+
         Date purchased = new SimpleDateFormat("yyyy-dd-MM").parse(createRandomDate(1980, 2020));
         Date sold = new SimpleDateFormat("yyyy-dd-MM").parse(createRandomDate(1980, 2020));
 
         if (purchased.after(sold)) {
-            //System.out.print("\n XXX - datePurchased after before dateSold");
             //copy original values
             Date originalDatePurchased = purchased;
             //Date originalDateSold = sold;
             //swap values
             purchased = sold;
             sold = originalDatePurchased;
-            //convert to sql Date
-            sqlDatePurchased = new java.sql.Date(purchased.getTime());
-            sqlDateSold = new java.sql.Date(sold.getTime());
-        } else {
-            sqlDatePurchased = new java.sql.Date(purchased.getTime());
-            sqlDateSold = new java.sql.Date(sold.getTime());
         }
 
-        // todo: insert data into person table
+        Person person = new Person();
+        person.setId(index);
+        person.setFirstName(firstName);
+        person.setMiddleName(middleName);
+        person.setLastName(lastName);
+        person.setDatePurchased(purchased.toString());
+        person.setDateSold(sold.toString());
+
+        return person;
+    }
+
+    private static Person generateAddressList(int index) throws java.text.ParseException {
+
+        String SOURCES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        String firstName = generateString(new Random(), SOURCES, 10);
+        String middleName = generateString(new Random(), SOURCES, 10);
+        String lastName = generateString(new Random(), SOURCES, 10);
+
+        // needed to insert to database
+        java.sql.Date sqlDatePurchased;
+        java.sql.Date sqlDateSold;
+
+        Date purchased = new SimpleDateFormat("yyyy-dd-MM").parse(createRandomDate(1980, 2020));
+        Date sold = new SimpleDateFormat("yyyy-dd-MM").parse(createRandomDate(1980, 2020));
+
+        if (purchased.after(sold)) {
+            //copy original values
+            Date originalDatePurchased = purchased;
+            //Date originalDateSold = sold;
+            //swap values
+            purchased = sold;
+            sold = originalDatePurchased;
+        }
+
         Person person = new Person();
         person.setId(index);
         person.setFirstName(firstName);
@@ -190,7 +273,6 @@ public class StageTestData {
             ex.printStackTrace();
         }
     }
-
 
     private static JSONArray getJsonArrayFromFile(String jsonNamesPath) {
 
