@@ -1,12 +1,9 @@
 package com.springboot.titletech;
 
-import com.springboot.titletech.dao.PersonDAO;
-import com.springboot.titletech.dao.PersonDAOImpl;
 import com.springboot.titletech.entity.Parcel;
 import com.springboot.titletech.entity.ParcelDocument;
 import com.springboot.titletech.entity.Person;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -37,7 +34,6 @@ public class StageTestData {
             "INSERT INTO person (first_name, middle_name, last_name) values (?, ?, ?)";
 
     protected static String insertParcelDataQuery = "INSERT INTO parcel (street, city, state, zip_code,previous_ownerid, current_ownerid) values (?, ?, ?,?,?,?)";
-    protected static String insertTimestampDataQuery = "INSERT INTO person (date_purchased, date_sold) values (?, ?)";
     protected static String SOURCES_ALL = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
     protected static String SOURCES_NUMBERS = "1234567890";
     protected static String SOURCES_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -47,60 +43,32 @@ public class StageTestData {
 
     public static void main(String[] args) throws java.text.ParseException {
 
-        // get json file paths from resource folder. this is good enough for now
-        // todo: write a class to load properties file
 
-        //get paths to json test data files
-//        ClassLoader classLoader = StageTestData.class.getClassLoader();
-//        String jsonNamesPath = classLoader.getResource("names.json").getPath();
-//        String jsonAddressesPath = classLoader.getResource("addresses.json").getPath();
-//        String jsonBoughtSoldTimestampsPath = classLoader.getResource("timestamps.json").getPath();
-
-        // get jsonArrays of test data for parsing/insertion to database
-//        JSONArray personList = getJsonArrayFromFile(jsonNamesPath);
-//        JSONArray parcelList = getJsonArrayFromFile(jsonAddressesPath);
-//        JSONArray boughtSoldTimestampsList = getJsonArrayFromFile(jsonBoughtSoldTimestampsPath);
-
-        // timestamps is going to a problem
-        /*
-        first need to create an array that makes sure data is organized by lowest date first
-        identify parcels with multiple owners
-        apply timestamps to that
-         */
-
-        // generate parcel data
         int numToGenerate = 5;
         ArrayList<Parcel> parcelList = new ArrayList<>();
-        //generate parcel document data
-
+        //generate parcel data
         ArrayList<ParcelDocument> parcelDocumentsList = new ArrayList<>();
-
         for (int j = 0; j < numToGenerate; j++) {
             parcelList.add(generateParcelList(j + 1));
         }
 
+        //generate parcel document data
         for (int j = 0; j < numToGenerate; j++) {
             parcelDocumentsList.add(generateParcelDocumentsList( parcelList, j));
-            // generate parcel id = 1, set current owner = 2, previous owner 1
-
         }
-        InsertParcelToDB(parcelList);
-        InsertParcelDocumentToDB(parcelDocumentsList);
 
-        // generate/insert person test data
-        int numOfPersonToGenerate = 100;
+        // generate person test data
         ArrayList<Person> personList = new ArrayList<>();
         for (int j = 0; j < numToGenerate; j++) {
-            personList.add(generatePersonList(parcelDocumentsList, j));
+            personList.add(generatePersonList(j));
         }
+
+        InsertParcelToDB(parcelList);
+        InsertParcelDocumentToDB(parcelDocumentsList);
         InsertPersonToDB(personList);
     }
 
     private static ParcelDocument generateParcelDocumentsList(List<Parcel> parcelList, int i) throws java.text.ParseException {
-
-        // needed to insert to database
-        java.sql.Date sqlDatePurchased;
-        java.sql.Date sqlDateSold;
 
         Date purchased = new SimpleDateFormat("yyyy-dd-MM").parse(createRandomDate(1980, 2020));
         Date sold = new SimpleDateFormat("yyyy-dd-MM").parse(createRandomDate(1980, 2020));
@@ -108,7 +76,6 @@ public class StageTestData {
         if (purchased.after(sold)) {
             //copy original values
             Date originalDatePurchased = purchased;
-            //Date originalDateSold = sold;
             //swap values
             purchased = sold;
             sold = originalDatePurchased;
@@ -144,7 +111,7 @@ public class StageTestData {
         return parcel;
     }
 
-    private static Person generatePersonList(List<ParcelDocument> parcelDocumentList, int index) throws java.text.ParseException {
+    private static Person generatePersonList(int index) {
 
         String firstName = generateString(new Random(), SOURCES_ALL, 10);
         String middleName = generateString(new Random(), SOURCES_ALL, 10);
@@ -155,13 +122,6 @@ public class StageTestData {
         person.setFirstName(firstName);
         person.setMiddleName(middleName);
         person.setLastName(lastName);
-//        for(ParcelDocument p : parcelDocumentList){
-//            if(p.getCurrent_ownerid() == person.getId()){
-//                person.setParcelid(p.getParcelid());
-//            }
-//        }
-//        person.setDatePurchased(parcelDocumentList.get(index).getDatePurchased());
-//        person.setDateSold(parcelDocumentList.get(index).getDateSold());
 
         return person;
     }
@@ -243,8 +203,6 @@ public class StageTestData {
 
     public static void InsertPersonToDB(ArrayList<Person> personList) {
 
-        int[] parcelid = getShuffledIntegerArray(personList.size());
-
         try {
 
             Connection conn = DriverManager.getConnection(url, user, password);
@@ -254,9 +212,6 @@ public class StageTestData {
                 statement.setString(1, p.getFirstName());
                 statement.setString(2, p.getMiddleName());
                 statement.setString(3, p.getLastName());
-//                statement.setString(4, p.getDatePurchased());
-//                statement.setString(5, p.getDateSold());
-//                statement.setInt(6, parcelid[p.getId()-1]); //db index are 1-100, list 0-99
 
                 int row = statement.executeUpdate();
                 if (row > 0) {
@@ -271,40 +226,6 @@ public class StageTestData {
         }
     }
 
-
-    private static Person generateAddressList(int index) throws java.text.ParseException {
-
-        String SOURCES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-        String firstName = generateString(new Random(), SOURCES, 10);
-        String middleName = generateString(new Random(), SOURCES, 10);
-        String lastName = generateString(new Random(), SOURCES, 10);
-
-        // needed to insert to database
-        java.sql.Date sqlDatePurchased;
-        java.sql.Date sqlDateSold;
-
-        Date purchased = new SimpleDateFormat("yyyy-dd-MM").parse(createRandomDate(1980, 2020));
-        Date sold = new SimpleDateFormat("yyyy-dd-MM").parse(createRandomDate(1980, 2020));
-
-        if (purchased.after(sold)) {
-            //copy original values
-            Date originalDatePurchased = purchased;
-            //Date originalDateSold = sold;
-            //swap values
-            purchased = sold;
-            sold = originalDatePurchased;
-        }
-
-        Person person = new Person();
-        person.setId(index);
-        person.setFirstName(firstName);
-        person.setMiddleName(middleName);
-        person.setLastName(lastName);
-        person.setDatePurchased(purchased.toString());
-        person.setDateSold(sold.toString());
-
-        return person;
-    }
 
     private static JSONArray getJsonArrayFromFile(String jsonNamesPath) {
 

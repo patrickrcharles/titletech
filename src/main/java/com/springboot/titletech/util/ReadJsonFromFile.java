@@ -16,6 +16,27 @@ public class ReadJsonFromFile {
 
         // saving this code for future reference to create json file reader
 
+        // get json file paths from resource folder. this is good enough for now
+        // todo: write a class to load properties file
+
+        //get paths to json test data files
+//        ClassLoader classLoader = StageTestData.class.getClassLoader();
+//        String jsonNamesPath = classLoader.getResource("names.json").getPath();
+//        String jsonAddressesPath = classLoader.getResource("addresses.json").getPath();
+//        String jsonBoughtSoldTimestampsPath = classLoader.getResource("timestamps.json").getPath();
+
+        // get jsonArrays of test data for parsing/insertion to database
+//        JSONArray personList = getJsonArrayFromFile(jsonNamesPath);
+//        JSONArray parcelList = getJsonArrayFromFile(jsonAddressesPath);
+//        JSONArray boughtSoldTimestampsList = getJsonArrayFromFile(jsonBoughtSoldTimestampsPath);
+
+        // timestamps is going to a problem
+        /*
+        first need to create an array that makes sure data is organized by lowest date first
+        identify parcels with multiple owners
+        apply timestamps to that
+         */
+
         // insert person data into array
         // personIndex is for keeping track of the index of the person object in the jsonArray
 //        final int[] personIndex = new int[2000];
