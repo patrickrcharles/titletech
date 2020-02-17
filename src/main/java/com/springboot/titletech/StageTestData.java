@@ -2,6 +2,7 @@ package com.springboot.titletech;
 
 import com.springboot.titletech.entity.Parcel;
 import com.springboot.titletech.entity.ParcelDocument;
+import com.springboot.titletech.entity.ParcelOwnership;
 import com.springboot.titletech.entity.Person;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
@@ -39,15 +40,19 @@ public class StageTestData {
     protected static String SOURCES_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     protected static String insertParceDocumentlDataQuery =
             "INSERT INTO parcel_document (parcelid, date_purchased, date_sold, current_ownerid, previous_ownerid) values (?, ?, ?,?,?)";
+    protected static String insertParceOwnershiplDataQuery =
+            "INSERT INTO parcel_ownership (current_ownerid, previous_ownerid, parcelid, parcel_documentid, date_purchased, date_sold) values (?, ?, ?, ?, ?, ?)";
 
 
     public static void main(String[] args) throws java.text.ParseException {
 
 
         int numToGenerate = 5;
+        // for parcel data
         ArrayList<Parcel> parcelList = new ArrayList<>();
-        //generate parcel data
+        //for  parcel document data
         ArrayList<ParcelDocument> parcelDocumentsList = new ArrayList<>();
+
         for (int j = 0; j < numToGenerate; j++) {
             parcelList.add(generateParcelList(j + 1));
         }
@@ -57,18 +62,46 @@ public class StageTestData {
             parcelDocumentsList.add(generateParcelDocumentsList( parcelList, j));
         }
 
-        // generate person test data
+        // generate person data
         ArrayList<Person> personList = new ArrayList<>();
         for (int j = 0; j < numToGenerate; j++) {
             personList.add(generatePersonList(j));
         }
 
+        // generate parcel ownership test data
+        ArrayList<ParcelOwnership> parcelOwnershipList = new ArrayList<>();
+        for (int j = 0; j < numToGenerate; j++) {
+            parcelOwnershipList.add(generateParcelOwnershipList(j, personList, parcelDocumentsList));
+        }
+
+
         InsertParcelToDB(parcelList);
         InsertParcelDocumentToDB(parcelDocumentsList);
         InsertPersonToDB(personList);
+        InsertParcelOwnershipToDB(parcelOwnershipList);
     }
 
-    private static ParcelDocument generateParcelDocumentsList(List<Parcel> parcelList, int i) throws java.text.ParseException {
+
+    private static ParcelOwnership generateParcelOwnershipList(int index, ArrayList<Person> personList, ArrayList<ParcelDocument> parcelDocumentList) {
+
+        ParcelOwnership parcelOwnership = new ParcelOwnership();
+
+        for (ParcelDocument parcelDocument: parcelDocumentList) {
+
+            parcelOwnership.setId(index+1);
+            parcelOwnership.setParcelid(parcelDocumentList.get(index).getParcelid());
+            parcelOwnership.setPrevious_ownerid(parcelDocumentList.get(index).getPrevious_ownerid());
+            parcelOwnership.setCurrent_ownerid(parcelDocumentList.get(index).getCurrent_ownerid());
+            parcelOwnership.setParcelDocumentid(parcelDocumentList.get(index).getId());
+            parcelOwnership.setDatePurchased(parcelDocumentList.get(index).getDatePurchased());
+            parcelOwnership.setDateSold(parcelDocumentList.get(index).getDateSold());
+
+        }
+
+        return parcelOwnership;
+    }
+
+    private static ParcelDocument generateParcelDocumentsList(List<Parcel> parcelList, int index) throws java.text.ParseException {
 
         Date purchased = new SimpleDateFormat("yyyy-dd-MM").parse(createRandomDate(1980, 2020));
         Date sold = new SimpleDateFormat("yyyy-dd-MM").parse(createRandomDate(1980, 2020));
@@ -82,11 +115,12 @@ public class StageTestData {
         }
 
         ParcelDocument parcelDocument = new ParcelDocument();
-        parcelDocument.setParcelid(i+1);
+        parcelDocument.setId(index+1);
+        parcelDocument.setParcelid(index+1);
         parcelDocument.setDatePurchased(purchased.toString());
         parcelDocument.setDateSold(sold.toString());
-        parcelDocument.setCurrent_ownerid(parcelList.get(i).getCurrent_ownerid());
-        parcelDocument.setPrevious_ownerid(parcelList.get(i).getPrevious_ownerid());
+        parcelDocument.setCurrent_ownerid(parcelList.get(index).getCurrent_ownerid());
+        parcelDocument.setPrevious_ownerid(parcelList.get(index).getPrevious_ownerid());
 
         return parcelDocument;
     }
@@ -145,6 +179,33 @@ public class StageTestData {
         return new String(text);
     }
 
+    private static void InsertParcelOwnershipToDB(ArrayList<ParcelOwnership> parcelOwnershipList) {
+
+        try {
+
+            Connection conn = DriverManager.getConnection(url, user, password);
+            for (ParcelOwnership p : parcelOwnershipList
+            ) {
+                PreparedStatement statement = conn.prepareStatement(insertParceOwnershiplDataQuery);
+                statement.setInt(1, p.getCurrent_ownerid());
+                statement.setInt(2, p.getPrevious_ownerid());
+                statement.setInt(3, p.getParcelid());
+                statement.setInt(4, p.getParcelDocumentid());
+                statement.setString(5, p.getDatePurchased());
+                statement.setString(6, p.getDateSold());
+
+                int row = statement.executeUpdate();
+                if (row > 0) {
+                    System.out.println("Parcel Ownership data entered successfully");
+                }
+                statement.close();
+            }
+            conn.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     private static void InsertParcelDocumentToDB(List<ParcelDocument> parcelDocumentList) {
 
