@@ -4,6 +4,7 @@ import com.springboot.titletech.entity.Parcel;
 import com.springboot.titletech.entity.ParcelDocument;
 import com.springboot.titletech.entity.ParcelOwnership;
 import com.springboot.titletech.entity.Person;
+import com.springboot.titletech.util.GetEntityObjectFromDatabase;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -44,7 +45,7 @@ public class StageTestData {
             "INSERT INTO parcel_ownership (current_ownerid, previous_ownerid, parcelid, parcel_documentid, date_purchased, date_sold) values (?, ?, ?, ?, ?, ?)";
 
 
-    public static void main(String[] args) throws java.text.ParseException {
+    public static void main(String[] args) throws java.text.ParseException, SQLException {
 
 
         int numToGenerate = 5;
@@ -74,11 +75,16 @@ public class StageTestData {
             parcelOwnershipList.add(generateParcelOwnershipList(j, personList, parcelDocumentsList));
         }
 
+        verifyData(personList, parcelList, parcelDocumentsList, parcelOwnershipList);
 
         InsertParcelToDB(parcelList);
         InsertParcelDocumentToDB(parcelDocumentsList);
         InsertPersonToDB(personList);
         InsertParcelOwnershipToDB(parcelOwnershipList);
+
+        GetEntityObjectFromDatabase util = new GetEntityObjectFromDatabase();
+        List<Person> ppl = util.getPersonObject();
+        //add method to remove data from database
     }
 
 
@@ -324,5 +330,28 @@ public class StageTestData {
         }
         // System.out.println("parcelids size : "+parcelids.length);
         return parcelids;
+    }
+
+    public static void verifyData(List<Person> personList, List<Parcel> parcelList,
+                      List<ParcelDocument> parcelDocumentList,
+                      List<ParcelOwnership> parcelOwnershipList)
+    {
+        int idToCheck = 4;
+        int parcelOwnershipid = 0;
+
+        assert(parcelDocumentList.get(idToCheck).getParcelid() == parcelList.get(idToCheck).getId());
+        assert(parcelDocumentList.get(idToCheck).getCurrent_ownerid() == parcelList.get(idToCheck).getCurrent_ownerid());
+        assert(parcelDocumentList.get(idToCheck).getPrevious_ownerid() == parcelList.get(idToCheck).getPrevious_ownerid());
+
+        for (ParcelOwnership p : parcelOwnershipList) {
+            if(p.getParcelid() == parcelDocumentList.get(idToCheck).getParcelid()){
+                parcelOwnershipid = parcelDocumentList.get(idToCheck).getId();
+                break;
+            }
+        }
+
+        assert(parcelOwnershipList.get(parcelOwnershipid).getCurrent_ownerid() == parcelList.get(idToCheck).getCurrent_ownerid());
+        assert(parcelOwnershipList.get(parcelOwnershipid).getPrevious_ownerid() == parcelList.get(idToCheck).getPrevious_ownerid());
+        assert(parcelOwnershipList.get(parcelOwnershipid).getParcelid() == parcelList.get(idToCheck).getId());
     }
 }
