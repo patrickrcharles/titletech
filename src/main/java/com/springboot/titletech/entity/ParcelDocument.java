@@ -20,9 +20,6 @@ public class ParcelDocument {
     @Column(name="date_sold")
     private String dateSold;
 
-    @Column(name="zip_code")
-    private String zipCode;
-
     @Column(name="current_ownerid")
     private int current_ownerid;
 
@@ -62,14 +59,6 @@ public class ParcelDocument {
 
     public void setDateSold(String dateSold) {
         this.dateSold = dateSold;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
     }
 
     public int getCurrent_ownerid() {

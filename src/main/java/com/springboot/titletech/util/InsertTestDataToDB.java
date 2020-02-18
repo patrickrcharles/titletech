@@ -22,7 +22,7 @@ public class InsertTestDataToDB {
     //    protected static String insertPersonDataQuery =
 //            "INSERT INTO person (first_name, middle_name, last_name, date_purchased, date_sold, parcelid) values (?, ?, ?, ?,?,?)";
     protected static String insertPersonDataQuery =
-            "INSERT INTO person (first_name, middle_name, last_name) values (?, ?, ?)";
+            "INSERT INTO person (parcelid, first_name, middle_name, last_name, date_purchased, date_sold) values (?, ?, ?, ?, ?, ?)";
 
     protected static String insertParcelDataQuery = "INSERT INTO parcel (street, city, state, zip_code,previous_ownerid, current_ownerid) values (?, ?, ?,?,?,?)";
     protected static String insertParceDocumentlDataQuery =
@@ -122,9 +122,12 @@ public class InsertTestDataToDB {
             for (Person p : personList
             ) {
                 PreparedStatement statement = conn.prepareStatement(insertPersonDataQuery);
-                statement.setString(1, p.getFirstName());
-                statement.setString(2, p.getMiddleName());
-                statement.setString(3, p.getLastName());
+                statement.setInt(1, p.getParcelid());
+                statement.setString(2, p.getFirstName());
+                statement.setString(3, p.getMiddleName());
+                statement.setString(4, p.getLastName());
+                statement.setString(5, p.getDatePurchased());
+                statement.setString(6, p.getDateSold());
 
                 int row = statement.executeUpdate();
                 if (row > 0) {

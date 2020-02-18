@@ -81,7 +81,7 @@ public class GenerateTestData {
         return parcel;
     }
 
-    public static Person generatePersonList(int index) {
+    public static Person generatePersonList(int index, List<ParcelOwnership> parcelOwnershipList) {
 
         String firstName = generateString(new Random(), SOURCES_ALL, 10);
         String middleName = generateString(new Random(), SOURCES_ALL, 10);
@@ -92,6 +92,14 @@ public class GenerateTestData {
         person.setFirstName(firstName);
         person.setMiddleName(middleName);
         person.setLastName(lastName);
+        for (ParcelOwnership p : parcelOwnershipList) {
+            if(p.getCurrent_ownerid() == person.getId())
+            {
+                person.setParcelid(p.getParcelid());
+                person.setDatePurchased(p.getDatePurchased());
+                person.setDateSold(p.getDateSold());
+            }
+        }
 
         return person;
     }

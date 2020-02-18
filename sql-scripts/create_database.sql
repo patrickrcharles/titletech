@@ -13,8 +13,8 @@ CREATE TABLE `person` (
   `first_name` varchar(45) DEFAULT NULL,
   `middle_name` varchar(45) DEFAULT NULL,
   `last_name` varchar(45) DEFAULT NULL,
-  `date_purchased` varchar(45) DEFAULT '',
-  `date_sold`  varchar(45)  DEFAULT '',
+  `date_purchased` varchar(45) DEFAULT '00/00/0000',
+  `date_sold`  varchar(45) DEFAULT '00/00/0000',
   
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

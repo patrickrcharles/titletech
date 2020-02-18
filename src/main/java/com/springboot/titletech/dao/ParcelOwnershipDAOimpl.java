@@ -1,6 +1,6 @@
 package com.springboot.titletech.dao;
 
-import com.springboot.titletech.entity.ParcelDocument;
+import com.springboot.titletech.entity.ParcelOwnership;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,47 +10,60 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-public class ParcelDocumentDAOImpl implements ParcelDocumentDAO {
+public class ParcelOwnershipDAOimpl implements ParcelOwnershipDAO{
 
     // define field for entitymanager
     private EntityManager entityManager;
 
     // set up constructor injection
     @Autowired
-    public ParcelDocumentDAOImpl(EntityManager theEntityManager) {
+    public ParcelOwnershipDAOimpl(EntityManager theEntityManager) {
         entityManager = theEntityManager;
     }
 
+
     @Override
-    public List<ParcelDocument> findAll() {
-        System.out.print("ParcelDocumentDAO :: List<ParcelDocument> findAll()");
+    public List<ParcelOwnership> findAll() {
+
         // get the current hibernate session
         Session currentSession = entityManager.unwrap(Session.class);
 
         // create a query
-        Query<ParcelDocument> theQuery =
-                currentSession.createQuery("from ParcelDocument", ParcelDocument.class);
+        Query<ParcelOwnership> theQuery =
+                currentSession.createQuery("from Parcel", ParcelOwnership.class);
 
         // execute query and get result list
-        List<ParcelDocument> parcelDocuments = theQuery.getResultList();
+        List<ParcelOwnership> parcelOwnerships = theQuery.getResultList();
 
         // return the results
-        return parcelDocuments;
+        return parcelOwnerships;
     }
 
-    @Override
-    public ParcelDocument findById(int theId) {
-        return null;
-    }
 
     @Override
-    public void save(ParcelDocument theParcelDocument) {
-        System.out.println("ParcelDAOImpl :: save()");
+    public ParcelOwnership findById(int theId) {
+
         // get the current hibernate session
         Session currentSession = entityManager.unwrap(Session.class);
 
-        // save employee
-        currentSession.saveOrUpdate(theParcelDocument);
+        // get the employee
+        ParcelOwnership theParcelOwnership =
+                currentSession.get(ParcelOwnership.class, theId);
+
+        // return the employee
+        return theParcelOwnership;
+    }
+
+
+    @Override
+    public void save(ParcelOwnership parcelOwnership) {
+
+        System.out.println("\nParcelOwnershipDAOImpl :: save()");
+        // get the current hibernate session
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        // save
+        currentSession.saveOrUpdate(parcelOwnership);
     }
 
     @Override
@@ -62,7 +75,7 @@ public class ParcelDocumentDAOImpl implements ParcelDocumentDAO {
         // delete object with primary key
         Query theQuery =
                 currentSession.createQuery(
-                        "delete from parcel_document where id=:parcelId");
+                        "delete from ParcelOwnership where id=:parcelId");
         theQuery.setParameter("parcelId", theId);
 
         theQuery.executeUpdate();

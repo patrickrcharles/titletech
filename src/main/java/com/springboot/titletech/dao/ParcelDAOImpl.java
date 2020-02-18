@@ -1,7 +1,6 @@
 package com.springboot.titletech.dao;
 
 import com.springboot.titletech.entity.Parcel;
-import com.springboot.titletech.entity.Person;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;

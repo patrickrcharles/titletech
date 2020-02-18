@@ -30,7 +30,7 @@ public class StageTestData {
     public static void main(String[] args) throws java.text.ParseException, SQLException {
 
 
-        int numToGenerate = 50;
+        int numToGenerate = 5;
         // parcel data
         ArrayList<Parcel> parcelList = new ArrayList<>();
         //parcel document data
@@ -43,8 +43,8 @@ public class StageTestData {
         for (int j = 0; j < numToGenerate; j++) {
             parcelList.add(GenerateTestData.generateParcelList(j + 1));
             parcelDocumentsList.add(GenerateTestData.generateParcelDocumentsList( parcelList, j));
-            personList.add(GenerateTestData.generatePersonList(j));
             parcelOwnershipList.add(GenerateTestData.generateParcelOwnershipList(j, personList, parcelDocumentsList));
+            personList.add(GenerateTestData.generatePersonList(j, parcelOwnershipList));
         }
 
         // in progress

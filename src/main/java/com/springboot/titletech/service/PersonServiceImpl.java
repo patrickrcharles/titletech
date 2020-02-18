@@ -32,8 +32,8 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	@Transactional
-	public void save(Person theEmployee) {
-		personDAO.save(theEmployee);
+	public void save(Person thePerson) {
+		personDAO.save(thePerson);
 	}
 
 	@Override
