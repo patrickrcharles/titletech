@@ -55,12 +55,11 @@ public class StageTestData {
         InsertTestDataToDB.InsertPersonToDB(personList);
         InsertTestDataToDB.InsertParcelOwnershipToDB(parcelOwnershipList);
 
-
         List<Person> ppl = GetEntityObjectFromDatabase.getPersonObject();
         List<Parcel> parcels = GetEntityObjectFromDatabase.getParcelObject();
         List<ParcelDocument> parcelDocuments = GetEntityObjectFromDatabase.getParcelDocumentObject();
 
-        //add method to remove data from database
+        //add method to remove/cleanup test data from database
     }
 
 

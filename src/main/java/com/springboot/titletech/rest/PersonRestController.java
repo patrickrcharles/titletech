@@ -27,14 +27,14 @@ public class PersonRestController {
 	}
 	
 	// expose "/persons" and return list of persons
-	@GetMapping("/persons")
+	@GetMapping("/person")
 	public List<Person> findAll() {
 		return personService.findAll();
 	}
 
 	// add mapping for GET /persons/{personId}
 	
-	@GetMapping("/persons/{personid}")
+	@GetMapping("/person/{personid}")
 	public Person getperson(@PathVariable int personid) {
 
 		Person thePerson = personService.findById(personid);
@@ -48,7 +48,7 @@ public class PersonRestController {
 	
 	// add mapping for POST /persons - add new person
 	
-	@PostMapping("/persons")
+	@PostMapping("/person")
 	public Person addperson(@RequestBody Person thePerson) {
 		
 		// also just in case they pass an id in JSON ... set id to 0
@@ -63,7 +63,7 @@ public class PersonRestController {
 	
 	// add mapping for PUT /persons - update existing person
 	
-	@PutMapping("/persons")
+	@PutMapping("/person")
 	public Person updateperson(@RequestBody Person thePerson) {
 		
 		personService.save(thePerson);
@@ -73,7 +73,7 @@ public class PersonRestController {
 	
 	// add mapping for DELETE /persons/{personId} - delete person
 	
-	@DeleteMapping("/persons/{personid}")
+	@DeleteMapping("/person/{personid}")
 	public String deleteperson(@PathVariable int personid) {
 		
 		Person tempperson = personService.findById(personid);
