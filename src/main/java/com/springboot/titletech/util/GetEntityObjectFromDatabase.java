@@ -12,15 +12,15 @@ import java.util.List;
 
 public class GetEntityObjectFromDatabase {
     // database connect info
-    final String url = "jdbc:mysql://localhost/title-ownership?useSSL=false";
-    final String user = "root";
-    final String password = "admin";
+    private final static String url = "jdbc:mysql://localhost/title-ownership?useSSL=false";
+    private final static String user = "root";
+    private final static String password = "admin";
 
-    final String getPersonObjectQuery = "SELECT * from person;";
-    final String getParcelObjectQuery = "SELECT * from parcel;";
-    final String getParcelDocumentObjectQuery = "SELECT * from parcel_document;";
+    private final static String getPersonObjectQuery = "SELECT * from person;";
+    private final static String getParcelObjectQuery = "SELECT * from parcel;";
+    private final static String getParcelDocumentObjectQuery = "SELECT * from parcel_document;";
 
-    public List<Person> getPersonObject() throws SQLException {
+    public static List<Person> getPersonObject() throws SQLException {
 
         List<Person> personList = new ArrayList<>();
 
@@ -51,7 +51,7 @@ public class GetEntityObjectFromDatabase {
         return personList;
     }
 
-    public List<Parcel> getParcelObject() throws SQLException {
+    public static List<Parcel> getParcelObject() throws SQLException {
 
         List<Parcel> parcelList = new ArrayList<>();
 
@@ -88,7 +88,7 @@ public class GetEntityObjectFromDatabase {
         return parcelList;
     }
 
-    public List<ParcelDocument> getParcelDocumentObject() throws SQLException {
+    public static List<ParcelDocument> getParcelDocumentObject() throws SQLException {
 
         List<ParcelDocument> ParcelDocumentList = new ArrayList<>();
 

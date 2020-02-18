@@ -30,12 +30,14 @@ public class StageTestData {
     public static void main(String[] args) throws java.text.ParseException, SQLException {
 
 
-        int numToGenerate = 5;
-        // for parcel data
+        int numToGenerate = 50;
+        // parcel data
         ArrayList<Parcel> parcelList = new ArrayList<>();
-        //for  parcel document data
+        //parcel document data
         ArrayList<ParcelDocument> parcelDocumentsList = new ArrayList<>();
+        // person data
         ArrayList<Person> personList = new ArrayList<>();
+        //parcel ownership data
         ArrayList<ParcelOwnership> parcelOwnershipList = new ArrayList<>();
 
         for (int j = 0; j < numToGenerate; j++) {
@@ -53,11 +55,11 @@ public class StageTestData {
         InsertTestDataToDB.InsertPersonToDB(personList);
         InsertTestDataToDB.InsertParcelOwnershipToDB(parcelOwnershipList);
 
-        GetEntityObjectFromDatabase util = new GetEntityObjectFromDatabase();
-        List<Person> ppl = util.getPersonObject();
-        List<Parcel> parcels = util.getParcelObject();
-        List<ParcelDocument> parcelDocuments = util.getParcelDocumentObject();
-        
+
+        List<Person> ppl = GetEntityObjectFromDatabase.getPersonObject();
+        List<Parcel> parcels = GetEntityObjectFromDatabase.getParcelObject();
+        List<ParcelDocument> parcelDocuments = GetEntityObjectFromDatabase.getParcelDocumentObject();
+
         //add method to remove data from database
     }
 

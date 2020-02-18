@@ -37,7 +37,7 @@ DROP TABLE IF EXISTS `parcel_document`;
 
 CREATE TABLE `parcel_document` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `parcelparcelid` int(11) DEFAULT NULL,
+  `parcelid` int(11) DEFAULT NULL,
   `date_purchased` date DEFAULT NULL,
   `date_sold` date DEFAULT NULL,
   `current_owner` varchar(45) DEFAULT NULL,
