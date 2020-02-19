@@ -30,7 +30,7 @@ public class ParcelOwnershipDAOimpl implements ParcelOwnershipDAO{
 
         // create a query
         Query<ParcelOwnership> theQuery =
-                currentSession.createQuery("from Parcel", ParcelOwnership.class);
+                currentSession.createQuery("from ParcelOwnership", ParcelOwnership.class);
 
         // execute query and get result list
         List<ParcelOwnership> parcelOwnerships = theQuery.getResultList();
@@ -69,7 +69,6 @@ public class ParcelOwnershipDAOimpl implements ParcelOwnershipDAO{
     @Override
     public void deleteById(int theId) {
 
-        // get the current hibernate session
         Session currentSession = entityManager.unwrap(Session.class);
 
         // delete object with primary key

@@ -1,6 +1,5 @@
 package com.springboot.titletech.dao;
 
-import com.springboot.titletech.entity.Parcel;
 import com.springboot.titletech.entity.ParcelOwnership;
 
 import java.util.List;
