@@ -17,6 +17,7 @@ public class GetEntityObjectFromDatabase {
     private final static String password = "admin";
 
     private final static String getPersonObjectQuery = "SELECT * from person;";
+    private final static String getPersonNameQuery = "SELECT first_name, middle_name, last_name from person where id=";
     private final static String getParcelObjectQuery = "SELECT * from parcel;";
     private final static String getParcelDocumentObjectQuery = "SELECT * from parcel_document;";
 
@@ -123,5 +124,33 @@ public class GetEntityObjectFromDatabase {
 
         return ParcelDocumentList;
     }
-
+//    public static String getPersonNameById( int personid) throws SQLException {
+//
+//        Person person = new Person();
+//        try {
+//            Connection conn = DriverManager.getConnection(url, user, password);
+//            PreparedStatement statement = conn.prepareStatement(getPersonNameQuery+personid);
+//            ResultSet rs = statement.executeQuery(getPersonNameQuery+personid);
+//
+//            while (rs.next()) {
+//                int id = rs.getInt("id");
+//                if(id == personid) {
+//                    String first = rs.getString("first_name");
+//                    String middle = rs.getString("middle_name");
+//                    String last = rs.getString("last_name");
+//
+//                    person.setId(id);
+//                    person.setFirstName(first);
+//                    person.setMiddleName(middle);
+//                    person.setLastName(last);
+//                }
+//
+//            }
+//            conn.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return person.getFirstName() + " " + person.getMiddleName() + " " + person.getLastName();
+//    }
 }

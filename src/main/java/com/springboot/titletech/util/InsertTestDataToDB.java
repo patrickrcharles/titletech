@@ -24,9 +24,11 @@ public class InsertTestDataToDB {
     protected static String insertPersonDataQuery =
             "INSERT INTO person (parcelid, first_name, middle_name, last_name, date_purchased, date_sold) values (?, ?, ?, ?, ?, ?)";
 
-    protected static String insertParcelDataQuery = "INSERT INTO parcel (street, city, state, zip_code,previous_ownerid, current_ownerid) values (?, ?, ?,?,?,?)";
+    protected static String insertParcelDataQuery = "INSERT INTO parcel (street, city, state, zip_code,previous_ownerid, current_ownerid) " +
+            "values (?, ?, ?,?,?,?)";
     protected static String insertParceDocumentlDataQuery =
-            "INSERT INTO parcel_document (parcelid, date_purchased, date_sold, current_ownerid, previous_ownerid) values (?, ?, ?,?,?)";
+            "INSERT INTO parcel_document (parcelid, date_purchased, date_sold, current_ownerid, previous_ownerid, current_owner, previous_owner)" +
+                    " values (?, ?, ?,? ,?, ? , ?)";
     protected static String insertParceOwnershiplDataQuery =
             "INSERT INTO parcel_ownership (current_ownerid, previous_ownerid, parcelid, parcel_documentid, date_purchased, date_sold) values (?, ?, ?, ?, ?, ?)";
 
@@ -72,6 +74,8 @@ public class InsertTestDataToDB {
                 statement.setString(3, p.getDateSold());
                 statement.setInt(4, p.getCurrent_ownerid());
                 statement.setInt(5, p.getPrevious_ownerid());
+                statement.setString(6, p.getCurrent_owner());
+                statement.setString(7, p.getPrevious_owner());
 
                 int row = statement.executeUpdate();
                 if (row > 0) {

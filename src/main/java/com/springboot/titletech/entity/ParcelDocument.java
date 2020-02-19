@@ -26,6 +26,12 @@ public class ParcelDocument {
     @Column(name="previous_ownerid")
     private int previous_ownerid;
 
+    @Column(name="current_owner")
+    private String current_owner;
+
+    @Column(name="previous_owner")
+    private String previous_owner;
+
     public ParcelDocument() {
     }
 
@@ -75,5 +81,21 @@ public class ParcelDocument {
 
     public void setPrevious_ownerid(int previous_ownerid) {
         this.previous_ownerid = previous_ownerid;
+    }
+
+    public String getCurrent_owner() {
+        return current_owner;
+    }
+
+    public void setCurrent_owner(String current_owner) {
+        this.current_owner = current_owner;
+    }
+
+    public String getPrevious_owner() {
+        return previous_owner;
+    }
+
+    public void setPrevious_owner(String previous_owner) {
+        this.previous_owner = previous_owner;
     }
 }

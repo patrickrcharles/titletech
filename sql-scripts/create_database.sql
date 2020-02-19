@@ -42,6 +42,8 @@ CREATE TABLE `parcel_document` (
   `date_sold` varchar(45) DEFAULT NULL,
   `current_ownerid` int(11) DEFAULT NULL,
   `previous_ownerid` int(11) DEFAULT NULL,
+  `current_owner` varchar(45) DEFAULT NULL,
+  `previous_owner` varchar(45) DEFAULT NULL,
 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

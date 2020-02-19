@@ -14,14 +14,8 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -41,18 +35,23 @@ public class StageTestData {
         ArrayList<ParcelOwnership> parcelOwnershipList = new ArrayList<>();
 
         for (int j = 0; j < numToGenerate; j++) {
-            parcelList.add(GenerateTestData.generateParcelList(j + 1));
-            parcelDocumentsList.add(GenerateTestData.generateParcelDocumentsList( parcelList, j));
+            personList.add(GenerateTestData.GeneratePersonList(j));
+        }
+
+        for (int j = 0; j < numToGenerate; j++) {
+            parcelList.add(GenerateTestData.generateParcelList(j ));
+            parcelDocumentsList.add(GenerateTestData.generateParcelDocumentsList( personList, parcelList, j));
             parcelOwnershipList.add(GenerateTestData.generateParcelOwnershipList(j, personList, parcelDocumentsList));
-            personList.add(GenerateTestData.generatePersonList(j, parcelOwnershipList));
+            //update person list with new data
+            GenerateTestData.GeneratePersonList(j, personList.get(j), parcelOwnershipList);
         }
 
         // in progress
         verifyData(personList, parcelList, parcelDocumentsList, parcelOwnershipList);
 
+        InsertTestDataToDB.InsertPersonToDB(personList);
         InsertTestDataToDB.InsertParcelToDB(parcelList);
         InsertTestDataToDB.InsertParcelDocumentToDB(parcelDocumentsList);
-        InsertTestDataToDB.InsertPersonToDB(personList);
         InsertTestDataToDB.InsertParcelOwnershipToDB(parcelOwnershipList);
 
         List<Person> ppl = GetEntityObjectFromDatabase.getPersonObject();

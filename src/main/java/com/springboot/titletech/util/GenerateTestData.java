@@ -5,6 +5,7 @@ import com.springboot.titletech.entity.ParcelDocument;
 import com.springboot.titletech.entity.ParcelOwnership;
 import com.springboot.titletech.entity.Person;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,9 +23,9 @@ public class GenerateTestData {
 
         ParcelOwnership parcelOwnership = new ParcelOwnership();
 
-        for (ParcelDocument parcelDocument: parcelDocumentList) {
+        for (ParcelDocument parcelDocument : parcelDocumentList) {
 
-            parcelOwnership.setId(index+1);
+            parcelOwnership.setId(index + 1);
             parcelOwnership.setParcelid(parcelDocumentList.get(index).getParcelid());
             parcelOwnership.setPrevious_ownerid(parcelDocumentList.get(index).getPrevious_ownerid());
             parcelOwnership.setCurrent_ownerid(parcelDocumentList.get(index).getCurrent_ownerid());
@@ -37,7 +38,8 @@ public class GenerateTestData {
         return parcelOwnership;
     }
 
-    public static ParcelDocument generateParcelDocumentsList(List<Parcel> parcelList, int index) throws java.text.ParseException {
+    // todo: document needs to have current/previous owner name
+    public static ParcelDocument generateParcelDocumentsList(List<Person> personList, List<Parcel> parcelList, int index) throws java.text.ParseException, SQLException {
 
         Date purchased = new SimpleDateFormat("yyyy-dd-MM").parse(createRandomDate(1980, 2020));
         Date sold = new SimpleDateFormat("yyyy-dd-MM").parse(createRandomDate(1980, 2020));
@@ -49,14 +51,28 @@ public class GenerateTestData {
             purchased = sold;
             sold = originalDatePurchased;
         }
+        //get current/previous owner names
+        int currentOwnerId = parcelList.get(index).getCurrent_ownerid();
+        int previousOwnerId = parcelList.get(index).getPrevious_ownerid();
+
+        // find current id in list first to get correct id
+        String currentOwnerName = personList.get(index).getFirstName() + " " +
+                personList.get(index).getMiddleName() + " " +
+                personList.get(index).getLastName();
+        String previousOwnerName = personList.get(index).getFirstName() + " " +
+                personList.get(index).getMiddleName() + " " +
+                personList.get(index).getLastName();
+
 
         ParcelDocument parcelDocument = new ParcelDocument();
-        parcelDocument.setId(index+1);
-        parcelDocument.setParcelid(index+1);
+        parcelDocument.setId(index + 1);
+        parcelDocument.setParcelid(index + 1);
         parcelDocument.setDatePurchased(purchased.toString());
         parcelDocument.setDateSold(sold.toString());
-        parcelDocument.setCurrent_ownerid(parcelList.get(index).getCurrent_ownerid());
-        parcelDocument.setPrevious_ownerid(parcelList.get(index).getPrevious_ownerid());
+        parcelDocument.setCurrent_ownerid(currentOwnerId);
+        parcelDocument.setPrevious_ownerid(previousOwnerId);
+        parcelDocument.setCurrent_owner(currentOwnerName);
+        parcelDocument.setPrevious_owner(previousOwnerName);
 
         return parcelDocument;
     }
@@ -70,31 +86,28 @@ public class GenerateTestData {
         String zipCode = generateString(new Random(), SOURCES_NUMBERS, 5);
 
         Parcel parcel = new Parcel();
-        parcel.setId(index+1);
+        parcel.setId(index + 1);
         parcel.setStreet(street);
         parcel.setCity(city);
         parcel.setState(state);
         parcel.setZipCode(zipCode);
-        parcel.setCurrent_ownerid(index+1); //ex index = 1
+        parcel.setCurrent_ownerid(index + 1); //ex index = 1
         parcel.setPrevious_ownerid(index); // ex, index = 0
 
         return parcel;
     }
 
-    public static Person generatePersonList(int index, List<ParcelOwnership> parcelOwnershipList) {
+    public static Person GeneratePersonList(int index, Person person, List<ParcelOwnership> parcelOwnershipList) {
 
         String firstName = generateString(new Random(), SOURCES_ALL, 10);
         String middleName = generateString(new Random(), SOURCES_ALL, 10);
         String lastName = generateString(new Random(), SOURCES_ALL, 10);
 
-        Person person = new Person();
-        person.setId(index+1);
-        person.setFirstName(firstName);
-        person.setMiddleName(middleName);
-        person.setLastName(lastName);
+//        person.setFirstName(firstName);
+//        person.setMiddleName(middleName);
+//        person.setLastName(lastName);
         for (ParcelOwnership p : parcelOwnershipList) {
-            if(p.getCurrent_ownerid() == person.getId())
-            {
+            if (p.getCurrent_ownerid() == person.getId()) {
                 person.setParcelid(p.getParcelid());
                 person.setDatePurchased(p.getDatePurchased());
                 person.setDateSold(p.getDateSold());
@@ -103,6 +116,26 @@ public class GenerateTestData {
 
         return person;
     }
+
+    public static Person GeneratePersonList(int index) {
+
+        String firstName = generateString(new Random(), SOURCES_ALL, 10);
+        String middleName = generateString(new Random(), SOURCES_ALL, 10);
+        String lastName = generateString(new Random(), SOURCES_ALL, 10);
+
+        Person person = new Person();
+
+        person.setId(index + 1);
+        person.setFirstName(firstName);
+        person.setMiddleName(middleName);
+        person.setLastName(lastName);
+
+        return person;
+    }
+
+
+
+
 
     private static int createRandomIntBetween(int start, int end) {
         return start + (int) Math.round(Math.random() * (end - start));
