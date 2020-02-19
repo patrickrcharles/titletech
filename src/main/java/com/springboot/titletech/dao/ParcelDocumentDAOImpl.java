@@ -1,5 +1,6 @@
 package com.springboot.titletech.dao;
 
+import com.springboot.titletech.entity.Parcel;
 import com.springboot.titletech.entity.ParcelDocument;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -23,7 +24,6 @@ public class ParcelDocumentDAOImpl implements ParcelDocumentDAO {
 
     @Override
     public List<ParcelDocument> findAll() {
-        System.out.print("ParcelDocumentDAO :: List<ParcelDocument> findAll()");
         // get the current hibernate session
         Session currentSession = entityManager.unwrap(Session.class);
 
@@ -40,12 +40,20 @@ public class ParcelDocumentDAOImpl implements ParcelDocumentDAO {
 
     @Override
     public ParcelDocument findById(int theId) {
-        return null;
+
+        // get the current hibernate session
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        // get the employee
+        ParcelDocument theParcel =
+                currentSession.get(ParcelDocument.class, theId);
+
+        // return the employee
+        return theParcel;
     }
 
     @Override
     public void save(ParcelDocument theParcelDocument) {
-        System.out.println("ParcelDAOImpl :: save()");
         // get the current hibernate session
         Session currentSession = entityManager.unwrap(Session.class);
 
@@ -62,7 +70,7 @@ public class ParcelDocumentDAOImpl implements ParcelDocumentDAO {
         // delete object with primary key
         Query theQuery =
                 currentSession.createQuery(
-                        "delete from parcel_document where id=:parcelId");
+                        "delete from ParcelDocument where id=:parcelId");
         theQuery.setParameter("parcelId", theId);
 
         theQuery.executeUpdate();

@@ -21,7 +21,6 @@ public class ParcelDocumentServiceImpl implements ParcelDocumentService {
     @Override
     @Transactional
     public List<ParcelDocument> findAll() {
-        System.out.print("\nParcelDocumentService :: List<ParcelDocument> findAll()");
         return parcelDocumentDAO.findAll();
     }
 
