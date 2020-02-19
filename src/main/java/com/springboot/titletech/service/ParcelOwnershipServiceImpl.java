@@ -26,16 +26,19 @@ public class ParcelOwnershipServiceImpl implements ParcelOwnershipService {
     }
 
     @Override
+    @Transactional
     public ParcelOwnership findById(int parcelOwnershipid) {
         return parcelOwnershipDAO.findById(parcelOwnershipid);
     }
 
     @Override
+    @Transactional
     public void save(ParcelOwnership parcelOwnership) {
         parcelOwnershipDAO.save(parcelOwnership);
     }
 
     @Override
+    @Transactional
     public void deleteById(int parcelOwnershipid) {
         parcelOwnershipDAO.deleteById(parcelOwnershipid);
     }

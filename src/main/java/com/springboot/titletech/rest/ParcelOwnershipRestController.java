@@ -23,7 +23,7 @@ public class ParcelOwnershipRestController {
         return parcelOwnershipService.findAll();
     }
 
-    @GetMapping("/parcelownership/{parcelownershipid}")
+    @GetMapping("/parcelownership/{parcelOwnershipid}")
     public ParcelOwnership getParcelOwnership(@PathVariable int parcelOwnershipid) {
 
         ParcelOwnership parcelOwnership = parcelOwnershipService.findById(parcelOwnershipid);
@@ -62,7 +62,7 @@ public class ParcelOwnershipRestController {
 
     // add mapping for DELETE /persons/{personId} - delete person
 
-    @DeleteMapping("/parcelownership/{parcelownershipid}")
+    @DeleteMapping("/parcelownership/{parcelOwnershipid}")
     public String deleteParcelOwnership(@PathVariable int parcelOwnershipid) {
 
         ParcelOwnership tempParcelOwnership = parcelOwnershipService.findById(parcelOwnershipid);
