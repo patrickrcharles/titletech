@@ -52,17 +52,29 @@ public class GenerateTestData {
             sold = originalDatePurchased;
         }
         //get current/previous owner names
-        int currentOwnerId = parcelList.get(index).getCurrent_ownerid();
-        int previousOwnerId = parcelList.get(index).getPrevious_ownerid();
+        int currentOwnerId = 0;
+        int previousOwnerId = 0;
+        String currentOwnerName = "";
+        String previousOwnerName = "";
 
         // find current id in list first to get correct id
-        String currentOwnerName = personList.get(index).getFirstName() + " " +
-                personList.get(index).getMiddleName() + " " +
-                personList.get(index).getLastName();
-        String previousOwnerName = personList.get(index).getFirstName() + " " +
-                personList.get(index).getMiddleName() + " " +
-                personList.get(index).getLastName();
-
+        for (Person p : personList) {
+            if (p.getId() == parcelList.get(index).getCurrent_ownerid()) {
+                currentOwnerId = parcelList.get(index).getCurrent_ownerid();
+                previousOwnerId = parcelList.get(index).getPrevious_ownerid();
+            }
+        }
+        for (Person p : personList) {
+            if (currentOwnerId == p.getId()) {
+                currentOwnerName = p.getFirstName() + " " +
+                        p.getMiddleName() + " " +
+                        p.getLastName();
+            }
+            if (previousOwnerId == p.getId())
+                previousOwnerName = p.getFirstName() + " " +
+                        p.getMiddleName() + " " +
+                        p.getLastName();
+        }
 
         ParcelDocument parcelDocument = new ParcelDocument();
         parcelDocument.setId(index + 1);
@@ -132,9 +144,6 @@ public class GenerateTestData {
 
         return person;
     }
-
-
-
 
 
     private static int createRandomIntBetween(int start, int end) {
