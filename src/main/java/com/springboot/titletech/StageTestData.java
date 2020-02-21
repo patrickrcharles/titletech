@@ -34,17 +34,13 @@ public class StageTestData {
         //parcel ownership data
         ArrayList<ParcelOwnership> parcelOwnershipList = new ArrayList<>();
 
-        for (int j = 0; j < numToGenerate; j++) {
-            personList.add(GenerateTestData.GeneratePersonList(j));
-        }
+        // create all test data, roughly 5 function calls
+        GenerateTestData.createTestData();
 
-        for (int j = 0; j < numToGenerate; j++) {
-            parcelList.add(GenerateTestData.generateParcelList(j ));
-            parcelDocumentsList.add(GenerateTestData.generateParcelDocumentsList( personList, parcelList, j));
-            parcelOwnershipList.add(GenerateTestData.generateParcelOwnershipList(j, personList, parcelDocumentsList));
-            //update person list with new data
-            GenerateTestData.GeneratePersonList(j, personList.get(j), parcelOwnershipList);
-        }
+        parcelDocumentsList = GenerateTestData.getParcelDocumentsList();
+        personList = GenerateTestData.getPersonList();
+        parcelList = GenerateTestData.getParcelList();
+        parcelOwnershipList = GenerateTestData.getParcelOwnershipList();
 
         // in progress
         verifyData(personList, parcelList, parcelDocumentsList, parcelOwnershipList);

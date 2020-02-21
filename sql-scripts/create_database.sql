@@ -52,6 +52,7 @@ DROP TABLE IF EXISTS `previous_owner`;
 
 CREATE TABLE `previous_owner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parcelid` int(11) DEFAULT NULL,
   `personid` int(11) DEFAULT NULL,
   `parcel_documentid` int(11) DEFAULT NULL,
   `parcel_ownershipid` int(11) DEFAULT NULL,

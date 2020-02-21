@@ -19,19 +19,15 @@ public class InsertTestDataToDB {
     protected static String user = "root";
     protected static String password = "admin";
 
-    //    protected static String insertPersonDataQuery =
-//            "INSERT INTO person (first_name, middle_name, last_name, date_purchased, date_sold, parcelid) values (?, ?, ?, ?,?,?)";
-    protected static String insertPersonDataQuery =
+    final static String insertPersonDataQuery =
             "INSERT INTO person (parcelid, first_name, middle_name, last_name, date_purchased, date_sold) values (?, ?, ?, ?, ?, ?)";
-
-    protected static String insertParcelDataQuery = "INSERT INTO parcel (street, city, state, zip_code,previous_ownerid, current_ownerid) " +
+    final static String insertParcelDataQuery = "INSERT INTO parcel (street, city, state, zip_code,previous_ownerid, current_ownerid) " +
             "values (?, ?, ?,?,?,?)";
-    protected static String insertParceDocumentlDataQuery =
+    final static String insertParceDocumentlDataQuery =
             "INSERT INTO parcel_document (parcelid, date_purchased, date_sold, current_ownerid, previous_ownerid, current_owner, previous_owner)" +
                     " values (?, ?, ?,? ,?, ? , ?)";
-    protected static String insertParceOwnershiplDataQuery =
+    final static String insertParceOwnershiplDataQuery =
             "INSERT INTO parcel_ownership (current_ownerid, previous_ownerid, parcelid, parcel_documentid, date_purchased, date_sold) values (?, ?, ?, ?, ?, ?)";
-
 
     public static void InsertParcelOwnershipToDB(ArrayList<ParcelOwnership> parcelOwnershipList) {
 
