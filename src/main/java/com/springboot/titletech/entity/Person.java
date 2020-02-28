@@ -29,6 +29,17 @@ public class Person {
     @Column(name="date_sold")
     private String dateSold;
 
+    @Column(name="isCurrentOwner")
+    private int isCurrentOwner;
+
+    public int getIsCurrentOwner() {
+        return isCurrentOwner;
+    }
+
+    public void setIsCurrentOwner(int isCurrentOwner) {
+        this.isCurrentOwner = isCurrentOwner;
+    }
+
     // define constructors
     public Person() {
 

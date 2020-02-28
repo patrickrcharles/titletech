@@ -20,9 +20,9 @@ public class InsertTestDataToDB {
     protected static String password = "admin";
 
     final static String insertPersonDataQuery =
-            "INSERT INTO person (parcelid, first_name, middle_name, last_name, date_purchased, date_sold) values (?, ?, ?, ?, ?, ?)";
+            "INSERT INTO person (parcelid, first_name, middle_name, last_name, date_purchased, date_sold, isCurrentOwner) values (?, ?, ?, ?, ?, ?, ?)";
     final static String insertParcelDataQuery = "INSERT INTO parcel (street, city, state, zip_code,previous_ownerid, current_ownerid) " +
-            "values (?, ?, ?,?,?,?)";
+            "values (?, ?, ?, ?, ?, ?)";
     final static String insertParceDocumentlDataQuery =
             "INSERT INTO parcel_document (parcelid, date_purchased, date_sold, current_ownerid, previous_ownerid, current_owner, previous_owner)" +
                     " values (?, ?, ?,? ,?, ? , ?)";
@@ -128,6 +128,7 @@ public class InsertTestDataToDB {
                 statement.setString(4, p.getLastName());
                 statement.setString(5, p.getDatePurchased());
                 statement.setString(6, p.getDateSold());
+                statement.setInt(7, p.getIsCurrentOwner());
 
                 int row = statement.executeUpdate();
                 if (row > 0) {

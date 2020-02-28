@@ -15,6 +15,7 @@ CREATE TABLE `person` (
   `last_name` varchar(45) DEFAULT NULL,
   `date_purchased` varchar(45) DEFAULT '00/00/0000',
   `date_sold`  varchar(45) DEFAULT '00/00/0000',
+  `isCurrentOwner` tinyint DEFAULT 0, 
   
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
@@ -64,9 +65,9 @@ DROP TABLE IF EXISTS `parcel_ownership`;
 
 CREATE TABLE `parcel_ownership` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parcelid` int(11) DEFAULT NULL,
   `current_ownerid` int(11) DEFAULT NULL,
   `previous_ownerid` int(11) DEFAULT NULL,
-  `parcelid` int(11) DEFAULT NULL,
   `parcel_documentid` int(11) DEFAULT NULL,
   `date_purchased` varchar(45) DEFAULT NULL,
   `date_sold` varchar(45) DEFAULT NULL,

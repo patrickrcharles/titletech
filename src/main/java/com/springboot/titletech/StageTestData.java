@@ -4,9 +4,7 @@ import com.springboot.titletech.entity.Parcel;
 import com.springboot.titletech.entity.ParcelDocument;
 import com.springboot.titletech.entity.ParcelOwnership;
 import com.springboot.titletech.entity.Person;
-import com.springboot.titletech.util.GenerateTestData;
-import com.springboot.titletech.util.GetEntityObjectFromDatabase;
-import com.springboot.titletech.util.InsertTestDataToDB;
+import com.springboot.titletech.util.*;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -35,15 +33,16 @@ public class StageTestData {
         ArrayList<ParcelOwnership> parcelOwnershipList = new ArrayList<>();
 
         // create all test data, roughly 5 function calls
-        GenerateTestData.createTestData();
+        //GenerateTestData.createTestData();
+        GenerateTestData3.createTestData();
 
-        parcelDocumentsList = GenerateTestData.getParcelDocumentsList();
-        personList = GenerateTestData.getPersonList();
-        parcelList = GenerateTestData.getParcelList();
-        parcelOwnershipList = GenerateTestData.getParcelOwnershipList();
+        parcelDocumentsList = GenerateTestData3.getParcelDocumentsList();
+        personList = GenerateTestData3.getPersonList();
+        parcelList = GenerateTestData3.getParcelList();
+        parcelOwnershipList = GenerateTestData3.getParcelOwnershipList();
 
         // in progress
-        verifyData(personList, parcelList, parcelDocumentsList, parcelOwnershipList);
+        //verifyData(personList, parcelList, parcelDocumentsList, parcelOwnershipList);
 
         InsertTestDataToDB.InsertPersonToDB(personList);
         InsertTestDataToDB.InsertParcelToDB(parcelList);
