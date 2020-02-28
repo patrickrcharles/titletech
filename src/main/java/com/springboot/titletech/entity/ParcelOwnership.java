@@ -23,6 +23,19 @@ public class ParcelOwnership {
     @Column(name="previous_owner")
     private String previous_owner;
 
+    @Column(name="parcelid")
+    private int parcelid;
+
+    @Column(name="parcel_documentid")
+    private int parcelDocumentid;
+
+    @Column(name="date_purchased")
+    private String datePurchased;
+
+    @Column(name="date_sold")
+    private String dateSold;
+
+
     public String getCurrent_owner() {
         return current_owner;
     }
@@ -38,18 +51,6 @@ public class ParcelOwnership {
     public void setPrevious_owner(String previous_owner) {
         this.previous_owner = previous_owner;
     }
-
-    @Column(name="parcelid")
-    private int parcelid;
-
-    @Column(name="parcel_documentid")
-    private int parcelDocumentid;
-
-    @Column(name="date_purchased")
-    private String datePurchased;
-
-    @Column(name="date_sold")
-    private String dateSold;
 
     public ParcelOwnership() {
     }

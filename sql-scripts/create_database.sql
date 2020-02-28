@@ -68,6 +68,8 @@ CREATE TABLE `parcel_ownership` (
   `parcelid` int(11) DEFAULT NULL,
   `current_ownerid` int(11) DEFAULT NULL,
   `previous_ownerid` int(11) DEFAULT NULL,
+  `current_owner`  varchar(45) DEFAULT NULL,
+  `previous_owner`  varchar(45) DEFAULT NULL,
   `parcel_documentid` int(11) DEFAULT NULL,
   `date_purchased` varchar(45) DEFAULT NULL,
   `date_sold` varchar(45) DEFAULT NULL,

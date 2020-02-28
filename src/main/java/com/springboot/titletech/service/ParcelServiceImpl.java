@@ -2,6 +2,7 @@ package com.springboot.titletech.service;
 
 import com.springboot.titletech.dao.ParcelDAO;
 import com.springboot.titletech.entity.Parcel;
+import com.springboot.titletech.entity.ParcelOwnership;
 import com.springboot.titletech.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,9 @@ public class ParcelServiceImpl implements ParcelService {
     @Override
     @Transactional
     public List<Person> findPreviousOwnerByParcelId(int theId) { return  parcelDAO.findPreviousOwnerByParcelId(theId); }
+    @Override
+    @Transactional
+    public List<ParcelOwnership> findParcelHistory(int theId) { return  parcelDAO.findParcelHistory(theId); }
 
     @Override
     @Transactional

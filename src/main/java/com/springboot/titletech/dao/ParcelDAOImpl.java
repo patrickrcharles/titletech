@@ -1,6 +1,7 @@
 package com.springboot.titletech.dao;
 
 import com.springboot.titletech.entity.Parcel;
+import com.springboot.titletech.entity.ParcelOwnership;
 import com.springboot.titletech.entity.Person;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -88,6 +89,25 @@ public class ParcelDAOImpl implements ParcelDAO {
 
         // return the results
         return persons;
+    }
+
+    @Override
+    public List<ParcelOwnership> findParcelHistory(int theId){
+        // get the current hibernate session
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        // create a query
+        Query<ParcelOwnership> theQuery =
+                currentSession.createQuery("from ParcelOwnership where " +
+                        "parcelid=:id", ParcelOwnership.class);
+
+        theQuery.setParameter("id", theId);
+
+        // execute query and get result list
+        List<ParcelOwnership> parcelOwnership = theQuery.getResultList();
+
+        // return the results
+        return parcelOwnership;
     }
 
 

@@ -27,7 +27,8 @@ public class InsertTestDataToDB {
             "INSERT INTO parcel_document (parcelid, date_purchased, date_sold, current_ownerid, previous_ownerid, current_owner, previous_owner)" +
                     " values (?, ?, ?,? ,?, ? , ?)";
     final static String insertParceOwnershiplDataQuery =
-            "INSERT INTO parcel_ownership (current_ownerid, previous_ownerid, parcelid, parcel_documentid, date_purchased, date_sold) values (?, ?, ?, ?, ?, ?)";
+            "INSERT INTO parcel_ownership (current_ownerid, previous_ownerid, parcelid, parcel_documentid, " +
+                    "date_purchased, date_sold,current_owner, previous_owner) values (?, ?, ?, ?, ?, ?, ? , ?)";
 
     public static void InsertParcelOwnershipToDB(ArrayList<ParcelOwnership> parcelOwnershipList) {
 
@@ -43,6 +44,8 @@ public class InsertTestDataToDB {
                 statement.setInt(4, p.getParcelDocumentid());
                 statement.setString(5, p.getDatePurchased());
                 statement.setString(6, p.getDateSold());
+                statement.setString(7, p.getCurrent_owner());
+                statement.setString(8, p.getPrevious_owner());
 
                 int row = statement.executeUpdate();
                 if (row > 0) {
