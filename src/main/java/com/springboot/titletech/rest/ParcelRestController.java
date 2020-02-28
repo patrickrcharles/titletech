@@ -3,8 +3,6 @@ package com.springboot.titletech.rest;
 import com.springboot.titletech.entity.Parcel;
 import com.springboot.titletech.entity.Person;
 import com.springboot.titletech.service.ParcelService;
-import com.springboot.titletech.service.ParcelServiceImpl;
-import com.springboot.titletech.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +37,30 @@ public class ParcelRestController {
 		}
 
 		return theParcel;
+	}
+
+	@GetMapping("/parcel/currentowner/{parcelid}")
+	public List<Person> getParcelCurrentOwner(@PathVariable int parcelid) {
+
+		List<Person> persons = parcelService.findCurrentOwnerByParcelId(parcelid);
+
+		if (persons == null) {
+			throw new RuntimeException("parcel id not found - " + parcelid);
+		}
+
+		return persons;
+	}
+
+	@GetMapping("/parcel/previousowner/{parcelid}")
+	public List<Person> getParcelPreviousOwner(@PathVariable int parcelid) {
+
+		List<Person> persons = parcelService.findPreviousOwnerByParcelId(parcelid);
+
+		if (persons == null) {
+			throw new RuntimeException("parcel id not found - " + parcelid);
+		}
+
+		return persons;
 	}
 
 	// add mapping for POST /persons - add new person

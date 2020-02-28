@@ -20,7 +20,7 @@ public class InsertTestDataToDB {
     protected static String password = "admin";
 
     final static String insertPersonDataQuery =
-            "INSERT INTO person (parcelid, first_name, middle_name, last_name, date_purchased, date_sold, isCurrentOwner) values (?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO person (parcelid, first_name, middle_name, last_name, date_purchased, date_sold, is_current_owner) values (?, ?, ?, ?, ?, ?, ?)";
     final static String insertParcelDataQuery = "INSERT INTO parcel (street, city, state, zip_code,previous_ownerid, current_ownerid) " +
             "values (?, ?, ?, ?, ?, ?)";
     final static String insertParceDocumentlDataQuery =

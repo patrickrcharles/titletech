@@ -1,6 +1,7 @@
 package com.springboot.titletech.dao;
 
 import com.springboot.titletech.entity.Parcel;
+import com.springboot.titletech.entity.Person;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,6 @@ public class ParcelDAOImpl implements ParcelDAO {
         return parcels;
     }
 
-
     @Override
     public Parcel findById(int theId) {
 
@@ -52,6 +52,42 @@ public class ParcelDAOImpl implements ParcelDAO {
 
         // return the employee
         return theParcel;
+    }
+
+    @Override
+    public List<Person> findCurrentOwnerByParcelId(int theId) {
+        // get the current hibernate session
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        // create a query
+        Query<Person> theQuery =
+                currentSession.createQuery("from Person where parcelid=:personid and is_current_owner = 1", Person.class);
+
+        theQuery.setParameter("personid", theId);
+
+        // execute query and get result list
+        List<Person> persons = theQuery.getResultList();
+
+        // return the results
+        return persons;
+    }
+
+    @Override
+    public List<Person> findPreviousOwnerByParcelId(int theId) {
+        // get the current hibernate session
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        // create a query
+        Query<Person> theQuery =
+                currentSession.createQuery("from Person where parcelid=:personid and is_current_owner = 0", Person.class);
+
+        theQuery.setParameter("personid", theId);
+
+        // execute query and get result list
+        List<Person> persons = theQuery.getResultList();
+
+        // return the results
+        return persons;
     }
 
 

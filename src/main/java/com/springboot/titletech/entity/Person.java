@@ -29,7 +29,7 @@ public class Person {
     @Column(name="date_sold")
     private String dateSold;
 
-    @Column(name="isCurrentOwner")
+    @Column(name="is_current_owner")
     private int isCurrentOwner;
 
     public int getIsCurrentOwner() {
