@@ -15,7 +15,7 @@ CREATE TABLE `person` (
   `last_name` varchar(45) DEFAULT NULL,
   `date_purchased` varchar(45) DEFAULT '00/00/0000',
   `date_sold`  varchar(45) DEFAULT '00/00/0000',
-  `isCurrentOwner` tinyint DEFAULT 0, 
+  `is_current_owner` int DEFAULT 0, 
   
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
