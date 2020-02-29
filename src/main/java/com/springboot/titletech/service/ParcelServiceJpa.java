@@ -5,6 +5,7 @@ import com.springboot.titletech.entity.ParcelOwnership;
 import com.springboot.titletech.entity.Person;
 import com.springboot.titletech.repository.ParcelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,12 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class ParcelServiceJpa {
 
     @Autowired
     private ParcelRepository parcelRepository;
 
-    @RequestMapping("/parceljpa")
+    @GetMapping("/parcel")
     public List<Parcel> retrieveAllParcels() {
         System.out.print("\n*********** id::: " + parcelRepository.findAll().get(0).getId());
         System.out.print("\n*********** street ::: " + parcelRepository.findAll().get(0).getStreet());
@@ -26,22 +28,22 @@ public class ParcelServiceJpa {
         return parcelRepository.findAll();
     }
 
-    @RequestMapping("/parceljpa/parceljpa/parcel/{id}")
+    @GetMapping("/parcel/parcel/{id}")
     public Parcel retrieveParcelByID(@PathVariable Long id) {
         return parcelRepository.findById(id).get();
     }
 
-    @RequestMapping(("/parceljpa/parcel/currentowner/{parcelid}"))
+    @GetMapping(("/parcel/currentowner/{parcelid}"))
     public List<Person> findCurrentOwnerByParcelId(@PathVariable int parcelid) {
         return parcelRepository.findCurrentOwnerByParcelId(parcelid);
     }
 
-    @RequestMapping(("/parceljpa/parcel/previousowner/{parcelid}"))
+    @GetMapping(("/parcel/previousowner/{parcelid}"))
     public List<Person> findPreviousOwnerByParcelId(@PathVariable int parcelid) {
         return parcelRepository.findCurrentOwnerByParcelId(parcelid);
     }
 
-    @RequestMapping(("/parceljpa/parcel/history/{parcelid}"))
+    @GetMapping(("parcel/history/{parcelid}"))
     List<ParcelOwnership> findParcelHistory(@PathVariable int parcelid) {
         return parcelRepository.findParcelHistory(parcelid);
     }

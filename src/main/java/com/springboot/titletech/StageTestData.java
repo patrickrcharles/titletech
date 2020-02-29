@@ -108,7 +108,7 @@ public class StageTestData {
 
         for (ParcelOwnership p : parcelOwnershipList) {
             if(p.getParcelid() == parcelDocumentList.get(idToCheck).getParcelid()){
-                parcelOwnershipid = parcelDocumentList.get(idToCheck).getId();
+                parcelOwnershipid = (int) parcelDocumentList.get(idToCheck).getId();
                 break;
             }
         }

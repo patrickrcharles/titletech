@@ -1,30 +1,33 @@
 package com.springboot.titletech.service;
 
 import com.springboot.titletech.entity.ParcelOwnership;
+import com.springboot.titletech.repository.ParcelOwnershipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
 public class ParcelOwnershipServiceJpa {
 
-    private ParcelOwnershipService parcelOwnershipService;
+    private ParcelOwnershipRepository parcelOwnershipRepository;
 
     @Autowired
-    public ParcelOwnershipServiceJpa(ParcelOwnershipService theParcelOwnershipService) {
-        parcelOwnershipService = theParcelOwnershipService;
+    public ParcelOwnershipServiceJpa(ParcelOwnershipRepository theParcelOwnershipService) {
+        parcelOwnershipRepository = theParcelOwnershipService;
     }
 
     @GetMapping("/parcelownership")
     public List<ParcelOwnership> findAll() {
-        return parcelOwnershipService.findAll();
+        return parcelOwnershipRepository.findAll();
     }
 
     @GetMapping("/parcelownership/{parcelOwnershipid}")
-    public ParcelOwnership getParcelOwnership(@PathVariable int parcelOwnershipid) {
+    public Optional<ParcelOwnership> getParcelOwnership(@PathVariable Long parcelOwnershipid) {
 
-        ParcelOwnership parcelOwnership = parcelOwnershipService.findById(parcelOwnershipid);
+        Optional<ParcelOwnership> parcelOwnership = parcelOwnershipRepository.findById(parcelOwnershipid);
 
         if (parcelOwnership == null) {
             throw new RuntimeException("Parcel Ownership id not found - " + parcelOwnershipid);
@@ -43,7 +46,7 @@ public class ParcelOwnershipServiceJpa {
 
         theParcelOwnership.setId(0);
 
-        parcelOwnershipService.save(theParcelOwnership);
+        parcelOwnershipRepository.save(theParcelOwnership);
 
         return theParcelOwnership;
     }
@@ -53,7 +56,7 @@ public class ParcelOwnershipServiceJpa {
     @PutMapping("/parcelownership")
     public ParcelOwnership updateParcelOwnership(@RequestBody ParcelOwnership parcelOwnership) {
 
-        parcelOwnershipService.save(parcelOwnership);
+        parcelOwnershipRepository.save(parcelOwnership);
 
         return parcelOwnership;
     }
@@ -61,9 +64,9 @@ public class ParcelOwnershipServiceJpa {
     // add mapping for DELETE /persons/{personId} - delete person
 
     @DeleteMapping("/parcelownership/{parcelOwnershipid}")
-    public String deleteParcelOwnership(@PathVariable int parcelOwnershipid) {
+    public String deleteParcelOwnership(@PathVariable long parcelOwnershipid) {
 
-        ParcelOwnership tempParcelOwnership = parcelOwnershipService.findById(parcelOwnershipid);
+        Optional<ParcelOwnership> tempParcelOwnership = parcelOwnershipRepository.findById(parcelOwnershipid);
 
         // throw exception if null
 
@@ -71,7 +74,7 @@ public class ParcelOwnershipServiceJpa {
             throw new RuntimeException("Parcel Ownership id not found - " + parcelOwnershipid);
         }
 
-        parcelOwnershipService.deleteById(parcelOwnershipid);
+        parcelOwnershipRepository.deleteById(parcelOwnershipid);
 
         return "Parcel Ownership id - " + parcelOwnershipid;
     }

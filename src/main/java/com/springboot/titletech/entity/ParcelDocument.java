@@ -9,7 +9,7 @@ public class ParcelDocument {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private long id;
 
     @Column(name="parcelid")
     private int parcelid;
@@ -35,7 +35,7 @@ public class ParcelDocument {
     public ParcelDocument() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

@@ -9,7 +9,7 @@ public class ParcelOwnership {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private long id;
 
     @Column(name="current_ownerid")
     private int current_ownerid;
@@ -55,7 +55,7 @@ public class ParcelOwnership {
     public ParcelOwnership() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

@@ -1,10 +1,8 @@
 package com.springboot.titletech.util;
 
-import com.springboot.titletech.dao.PersonDAO;
 import com.springboot.titletech.entity.Parcel;
 import com.springboot.titletech.entity.ParcelDocument;
 import com.springboot.titletech.entity.Person;
-import com.springboot.titletech.service.PersonServiceImpl;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,29 +1,32 @@
 package com.springboot.titletech.service;
 
 import com.springboot.titletech.entity.ParcelDocument;
+import com.springboot.titletech.repository.ParcelDocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
 public class ParcelDocumentServiceJpa {
-    private ParcelDocumentService parcelDocumentService;
+    private ParcelDocumentRepository parcelDocumentRepository;
 
     @Autowired
-    public ParcelDocumentServiceJpa(ParcelDocumentService theParcelDocumentService) {
-        parcelDocumentService = theParcelDocumentService;
+    public ParcelDocumentServiceJpa(ParcelDocumentRepository theParcelDocumentService) {
+        parcelDocumentRepository = theParcelDocumentService;
     }
 
     @GetMapping("/parceldocument")
     public List<ParcelDocument> findAll() {
-        return parcelDocumentService.findAll();
+        return parcelDocumentRepository.findAll();
     }
 
     @GetMapping("/parceldocument/{parcelDocumentid}")
-    public ParcelDocument getParcelDocument(@PathVariable int parcelDocumentid) {
+    public Optional<ParcelDocument> getParcelDocument(@PathVariable Long parcelDocumentid) {
 
-        ParcelDocument theParcelDocument = parcelDocumentService.findById(parcelDocumentid);
+        Optional<ParcelDocument> theParcelDocument = parcelDocumentRepository.findById(parcelDocumentid);
 
         if (theParcelDocument == null) {
             throw new RuntimeException("ParcelDocument id not found - " + parcelDocumentid);
@@ -42,7 +45,7 @@ public class ParcelDocumentServiceJpa {
 
         theParcelDocument.setId(0);
 
-        parcelDocumentService.save(theParcelDocument);
+        parcelDocumentRepository.save(theParcelDocument);
 
         return theParcelDocument;
     }
@@ -52,7 +55,7 @@ public class ParcelDocumentServiceJpa {
     @PutMapping("/parceldocument")
     public ParcelDocument updateParcelDocument(@RequestBody ParcelDocument theParcelDocument) {
 
-        parcelDocumentService.save(theParcelDocument);
+        parcelDocumentRepository.save(theParcelDocument);
 
         return theParcelDocument;
     }
@@ -60,9 +63,9 @@ public class ParcelDocumentServiceJpa {
     // add mapping for DELETE /persons/{personId} - delete person
 
     @DeleteMapping("/parceldocument/{parcelDocumentid}")
-    public String deleteParcelDocument(@PathVariable int parcelDocumentid) {
+    public String deleteParcelDocument(@PathVariable Long parcelDocumentid) {
 
-        ParcelDocument tempParcelDocument = parcelDocumentService.findById(parcelDocumentid);
+        Optional<ParcelDocument> tempParcelDocument = parcelDocumentRepository.findById(parcelDocumentid);
 
         // throw exception if null
 
@@ -70,7 +73,7 @@ public class ParcelDocumentServiceJpa {
             throw new RuntimeException("ParcelDocument id not found - " + parcelDocumentid);
         }
 
-        parcelDocumentService.deleteById(parcelDocumentid);
+        parcelDocumentRepository.deleteById(parcelDocumentid);
 
         return "Deleted ParcelDocument id - " + parcelDocumentid;
     }
