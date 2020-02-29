@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-public class ParcelRepositoryImpl implements ParcelResositoryCustom {
+public class ParcelRepositoryImpl implements ParcelRepositoryCustom {
     @PersistenceContext
     EntityManager entityManager;
 

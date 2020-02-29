@@ -5,7 +5,7 @@ import com.springboot.titletech.entity.Person;
 
 import java.util.List;
 
-public interface ParcelResositoryCustom {
+public interface ParcelRepositoryCustom {
 
     List<Person> findCurrentOwnerByParcelId(int theId);
 

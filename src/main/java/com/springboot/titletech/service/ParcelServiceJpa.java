@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class ParcelJpaService {
+public class ParcelServiceJpa {
 
     @Autowired
     private ParcelRepository parcelRepository;
@@ -46,5 +46,3 @@ public class ParcelJpaService {
         return parcelRepository.findParcelHistory(parcelid);
     }
 }
-
-
