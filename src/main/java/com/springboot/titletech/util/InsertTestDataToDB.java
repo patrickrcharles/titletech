@@ -38,14 +38,14 @@ public class InsertTestDataToDB {
             for (ParcelOwnership p : parcelOwnershipList
             ) {
                 PreparedStatement statement = conn.prepareStatement(insertParceOwnershiplDataQuery);
-                statement.setInt(1, p.getCurrent_ownerid());
-                statement.setInt(2, p.getPrevious_ownerid());
+                statement.setInt(1, p.getCurrentOwnerid());
+                statement.setInt(2, p.getPreviousOwnerid());
                 statement.setInt(3, p.getParcelid());
                 statement.setInt(4, p.getParcelDocumentid());
                 statement.setString(5, p.getDatePurchased());
                 statement.setString(6, p.getDateSold());
-                statement.setString(7, p.getCurrent_owner());
-                statement.setString(8, p.getPrevious_owner());
+                statement.setString(7, p.getCurrentOwner());
+                statement.setString(8, p.getPreviousOwner());
 
                 int row = statement.executeUpdate();
                 if (row > 0) {

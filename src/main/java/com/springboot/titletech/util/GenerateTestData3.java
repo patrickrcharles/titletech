@@ -80,7 +80,7 @@ public class GenerateTestData3 {
                 currentOwnerid = new Random().nextInt((numPersonToGenerate - 1) + 1) + 1;
                 //previous owner is the currentowner of previous list entry
                 // get last object
-                previousOwnerid = parcelOwnershipList.get(parcelOwnershipList.size()-1).getCurrent_ownerid();
+                previousOwnerid = parcelOwnershipList.get(parcelOwnershipList.size()-1).getCurrentOwnerid();
             }
 
             // generate parcel ownership
@@ -90,11 +90,11 @@ public class GenerateTestData3 {
             parcelOwnership.setParcelDocumentid(startTransactionId + i);
             parcelOwnership.setDatePurchased(purchased.toString());
             parcelOwnership.setDateSold(sold.toString());
-            parcelOwnership.setCurrent_ownerid(currentOwnerid);
-            parcelOwnership.setPrevious_ownerid(previousOwnerid);
+            parcelOwnership.setCurrentOwnerid(currentOwnerid);
+            parcelOwnership.setPreviousOwnerid(previousOwnerid);
 
-            parcelOwnership.setCurrent_owner(getCurrentParcelOwnerNameIdById(currentOwnerid));
-            parcelOwnership.setPrevious_owner(getPreviousParcelOwnerNameById(previousOwnerid));
+            parcelOwnership.setCurrentOwner(getCurrentParcelOwnerNameIdById(currentOwnerid));
+            parcelOwnership.setPreviousOwner(getPreviousParcelOwnerNameById(previousOwnerid));
 
             parcelOwnershipList.add(parcelOwnership);
 
@@ -111,15 +111,15 @@ public class GenerateTestData3 {
 
             ParcelDocument parcelDocument = new ParcelDocument();
             parcelDocument.setId(p.getParcelDocumentid());
-            parcelDocument.setPreviousOwnerid(p.getPrevious_ownerid());
+            parcelDocument.setPreviousOwnerid(p.getPreviousOwnerid());
             parcelDocument.setParcelid(p.getParcelid());
             parcelDocument.setDatePurchased(p.getDatePurchased());
             parcelDocument.setDateSold(p.getDateSold());
-            parcelDocument.setCurrentOwnerid(p.getCurrent_ownerid());
-            parcelDocument.setPreviousOwnerid(p.getPrevious_ownerid());
+            parcelDocument.setCurrentOwnerid(p.getCurrentOwnerid());
+            parcelDocument.setPreviousOwnerid(p.getPreviousOwnerid());
 
-            parcelDocument.setCurrentOwner(p.getCurrent_owner());
-            parcelDocument.setPreviousOwner(p.getPrevious_owner());
+            parcelDocument.setCurrentOwner(p.getCurrentOwner());
+            parcelDocument.setPreviousOwner(p.getPreviousOwner());
 
             parcelDocumentList.add(parcelDocument);
         }
@@ -151,8 +151,8 @@ public class GenerateTestData3 {
 
             int parcelIdToUpdate = ownership.getParcelid();
 
-            parcelList.get(parcelIdToUpdate - 1).setCurrentOwnerid(ownership.getCurrent_ownerid());
-            parcelList.get(parcelIdToUpdate - 1).setPreviousOwnerid(ownership.getPrevious_ownerid());
+            parcelList.get(parcelIdToUpdate - 1).setCurrentOwnerid(ownership.getCurrentOwnerid());
+            parcelList.get(parcelIdToUpdate - 1).setPreviousOwnerid(ownership.getPreviousOwnerid());
         }
     }
 
@@ -193,8 +193,8 @@ public class GenerateTestData3 {
     private static int getCurrentParcelOwnerIdByParcelId(int index) {
         int currentParcelOwnerId = 0;
         for (ParcelOwnership p : parcelOwnershipList) {
-            if (p.getCurrent_ownerid() == index)
-                currentParcelOwnerId = p.getCurrent_ownerid();
+            if (p.getCurrentOwnerid() == index)
+                currentParcelOwnerId = p.getCurrentOwnerid();
         }
         return currentParcelOwnerId;
     }
@@ -202,8 +202,8 @@ public class GenerateTestData3 {
     private static int getPreviousParcelOwnerIdByParcelId(int index) {
         int previousParcelOwnerId = 0;
         for (ParcelOwnership p : parcelOwnershipList) {
-            if (p.getPrevious_ownerid() == index)
-                previousParcelOwnerId = p.getCurrent_ownerid();
+            if (p.getPreviousOwnerid() == index)
+                previousParcelOwnerId = p.getCurrentOwnerid();
         }
         return previousParcelOwnerId;
     }
@@ -250,7 +250,7 @@ public class GenerateTestData3 {
         for (Person person : personList) {
             // where person.id = parcelOwnership.current_ownerid
             for (ParcelOwnership p : parcelOwnershipList) {
-                if (p.getCurrent_ownerid() == person.getId()) {
+                if (p.getCurrentOwnerid() == person.getId()) {
                     person.setParcelid(p.getParcelid());
                     person.setDatePurchased(p.getDatePurchased());
                     person.setDateSold(p.getDateSold());

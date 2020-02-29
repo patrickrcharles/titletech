@@ -113,8 +113,8 @@ public class StageTestData {
             }
         }
 
-        assert(parcelOwnershipList.get(parcelOwnershipid).getCurrent_ownerid() == parcelList.get(idToCheck).getCurrentOwnerid());
-        assert(parcelOwnershipList.get(parcelOwnershipid).getPrevious_ownerid() == parcelList.get(idToCheck).getPreviousOwnerid());
+        assert(parcelOwnershipList.get(parcelOwnershipid).getCurrentOwnerid() == parcelList.get(idToCheck).getCurrentOwnerid());
+        assert(parcelOwnershipList.get(parcelOwnershipid).getPreviousOwnerid() == parcelList.get(idToCheck).getPreviousOwnerid());
         assert(parcelOwnershipList.get(parcelOwnershipid).getParcelid() == parcelList.get(idToCheck).getId());
     }
 }
