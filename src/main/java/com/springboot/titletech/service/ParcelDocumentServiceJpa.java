@@ -24,7 +24,7 @@ public class ParcelDocumentServiceJpa {
     }
 
     @GetMapping("/parceldocument/{parcelDocumentid}")
-    public Optional<ParcelDocument> getParcelDocument(@PathVariable Long parcelDocumentid) {
+    public Optional<ParcelDocument> getParcelDocumentById(@PathVariable Long parcelDocumentid) {
 
         Optional<ParcelDocument> theParcelDocument = parcelDocumentRepository.findById(parcelDocumentid);
 
@@ -33,6 +33,18 @@ public class ParcelDocumentServiceJpa {
         }
 
         return theParcelDocument;
+    }
+
+    @GetMapping("/parceldocument/parcel/{parcelid}")
+    public List<ParcelDocument> getParcelDocumenstByParcelId(@PathVariable int parcelid) {
+
+        List<ParcelDocument> theParcelDocuments = parcelDocumentRepository.findParcelDocumentsByParcelID(parcelid);
+
+        if (theParcelDocuments == null) {
+            throw new RuntimeException("ParcelDocument id not found - " + parcelid);
+        }
+
+        return theParcelDocuments;
     }
 
     // add mapping for POST /persons - add new person
