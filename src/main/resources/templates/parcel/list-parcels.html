@@ -16,8 +16,10 @@
 
 <div class="container">
 
-    <h3>Parcelsy</h3>
+    <h3>Parcels</h3>
     <hr>
+    <a th:href="@{/}">Home</a>
+    <br><br>
 
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
@@ -26,6 +28,9 @@
             <th>street</th>
             <th>city</th>
             <th>state</th>
+            <th>zip code</th>
+            <th>current owner id</th>
+            <th>previous owner id</th>
         </tr>
         </thead>
 
@@ -35,6 +40,9 @@
             <td th:text="${tempParcel.street}" />
             <td th:text="${tempParcel.city}" />
             <td th:text="${tempParcel.state}" />
+            <td th:text="${tempParcel.zipCode}" />
+            <td th:text="${tempParcel.currentOwnerid}" />
+            <td th:text="${tempParcel.previousOwnerid}" />
 
         </tr>
         </tbody>

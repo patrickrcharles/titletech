@@ -9,14 +9,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <title>Parcel Documents</title>
+    <title>Persons</title>
 </head>
 
 <body>
 
 <div class="container">
 
-    <h3>Parcel Documents</h3>
+    <h3>Persons</h3>
     <hr>
     <a th:href="@{/}">Home</a>
     <br><br>
@@ -26,25 +26,25 @@
         <tr>
             <th>id</th>
             <th>parcel id</th>
+            <th>first name</th>
+            <th>middle name</th>
+            <th>last name </th>
             <th>date purchased</th>
             <th>date sold</th>
-            <th>current owner id</th>
-            <th>previous owner id</th>
-            <th>current owner </th>
-            <th>previous owner </th>
+            <th>is current owner</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="tempParceldocument : ${parceldocuments}">
-            <td th:text="${tempParceldocument.id}" />
-            <td th:text="${tempParceldocument.parcelid}" />
-            <td th:text="${tempParceldocument.datePurchased}" />
-            <td th:text="${tempParceldocument.dateSold}" />
-            <td th:text="${tempParceldocument.currentOwnerid}" />
-            <td th:text="${tempParceldocument.previousOwnerid}" />
-            <td th:text="${tempParceldocument.currentOwner}" />
-            <td th:text="${tempParceldocument.previousOwner}" />
+        <tr th:each="tempPerson : ${persons}">
+            <td th:text="${tempPerson.id}" />
+            <td th:text="${tempPerson.parcelid}" />
+            <td th:text="${tempPerson.firstName}" />
+            <td th:text="${tempPerson.middleName}" />
+            <td th:text="${tempPerson.lastName}" />
+            <td th:text="${tempPerson.datePurchased}" />
+            <td th:text="${tempPerson.dateSold}" />
+            <td th:text="${tempPerson.isCurrentOwner}" />
         </tr>
         </tbody>
     </table>

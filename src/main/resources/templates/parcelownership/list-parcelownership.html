@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <title>Parcel Documents</title>
+    <title>Parcel Ownerships</title>
 </head>
 
 <body>
@@ -26,25 +26,27 @@
         <tr>
             <th>id</th>
             <th>parcel id</th>
-            <th>date purchased</th>
-            <th>date sold</th>
             <th>current owner id</th>
             <th>previous owner id</th>
             <th>current owner </th>
             <th>previous owner </th>
+            <th>parcel document id</th>
+            <th>date purchased</th>
+            <th>date sold</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="tempParceldocument : ${parceldocuments}">
-            <td th:text="${tempParceldocument.id}" />
-            <td th:text="${tempParceldocument.parcelid}" />
-            <td th:text="${tempParceldocument.datePurchased}" />
-            <td th:text="${tempParceldocument.dateSold}" />
-            <td th:text="${tempParceldocument.currentOwnerid}" />
-            <td th:text="${tempParceldocument.previousOwnerid}" />
-            <td th:text="${tempParceldocument.currentOwner}" />
-            <td th:text="${tempParceldocument.previousOwner}" />
+        <tr th:each="tempParcelOwnership : ${parcelOwnerships}">
+            <td th:text="${tempParcelOwnership.id}" />
+            <td th:text="${tempParcelOwnership.parcelid}" />
+            <td th:text="${tempParcelOwnership.currentOwnerid}" />
+            <td th:text="${tempParcelOwnership.previousOwnerid}" />
+            <td th:text="${tempParcelOwnership.currentOwner}" />
+            <td th:text="${tempParcelOwnership.previousOwner}" />
+            <td th:text="${tempParcelOwnership.parcelDocumentid}" />
+            <td th:text="${tempParcelOwnership.datePurchased}" />
+            <td th:text="${tempParcelOwnership.dateSold}" />
         </tr>
         </tbody>
     </table>
