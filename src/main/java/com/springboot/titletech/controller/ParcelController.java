@@ -23,7 +23,7 @@ public class ParcelController {
         // add mapping for "/list"
 
         @GetMapping("/list")
-        public String listEmployees(Model theModel) {
+        public String listParcels(Model theModel) {
 
             // get employees from db
             List<Parcel> theParcels = parcelRepository.findAll();

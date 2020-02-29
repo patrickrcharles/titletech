@@ -75,8 +75,8 @@ public class GetEntityObjectFromDatabase {
                 parcel.setCity(city);
                 parcel.setState(state);
                 parcel.setZipCode(zipCode);
-                parcel.setCurrent_ownerid(currentOwnerId);
-                parcel.setPrevious_ownerid(previousOwnerId);
+                parcel.setCurrentOwnerid(currentOwnerId);
+                parcel.setPreviousOwnerid(previousOwnerId);
                 parcelList.add(parcel);
             }
             conn.close();
@@ -110,8 +110,8 @@ public class GetEntityObjectFromDatabase {
                 parcelDocument.setParcelid(parcelid);
                 parcelDocument.setDatePurchased(datePurchased);
                 parcelDocument.setDateSold(dateSold);
-                parcelDocument.setCurrent_ownerid(currentOwnerId);
-                parcelDocument.setPrevious_ownerid(previousOwnerId);
+                parcelDocument.setCurrentOwnerid(currentOwnerId);
+                parcelDocument.setPreviousOwnerid(previousOwnerId);
 
                 ParcelDocumentList.add(parcelDocument);
             }

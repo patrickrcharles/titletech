@@ -103,8 +103,8 @@ public class StageTestData {
         int parcelOwnershipid = 0;
 
         assert(parcelDocumentList.get(idToCheck).getParcelid() == parcelList.get(idToCheck).getId());
-        assert(parcelDocumentList.get(idToCheck).getCurrent_ownerid() == parcelList.get(idToCheck).getCurrent_ownerid());
-        assert(parcelDocumentList.get(idToCheck).getPrevious_ownerid() == parcelList.get(idToCheck).getPrevious_ownerid());
+        assert(parcelDocumentList.get(idToCheck).getCurrentOwnerid() == parcelList.get(idToCheck).getCurrentOwnerid());
+        assert(parcelDocumentList.get(idToCheck).getPreviousOwnerid() == parcelList.get(idToCheck).getPreviousOwnerid());
 
         for (ParcelOwnership p : parcelOwnershipList) {
             if(p.getParcelid() == parcelDocumentList.get(idToCheck).getParcelid()){
@@ -113,8 +113,8 @@ public class StageTestData {
             }
         }
 
-        assert(parcelOwnershipList.get(parcelOwnershipid).getCurrent_ownerid() == parcelList.get(idToCheck).getCurrent_ownerid());
-        assert(parcelOwnershipList.get(parcelOwnershipid).getPrevious_ownerid() == parcelList.get(idToCheck).getPrevious_ownerid());
+        assert(parcelOwnershipList.get(parcelOwnershipid).getCurrent_ownerid() == parcelList.get(idToCheck).getCurrentOwnerid());
+        assert(parcelOwnershipList.get(parcelOwnershipid).getPrevious_ownerid() == parcelList.get(idToCheck).getPreviousOwnerid());
         assert(parcelOwnershipList.get(parcelOwnershipid).getParcelid() == parcelList.get(idToCheck).getId());
     }
 }

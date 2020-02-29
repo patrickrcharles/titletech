@@ -24,10 +24,10 @@ public class Parcel {
     private String zipCode;
 
     @Column(name="current_ownerid")
-    private int current_ownerid;
+    private int currentOwnerid;
 
     @Column(name="previous_ownerid")
-    private int previous_ownerid;
+    private int previousOwnerid;
 
     public Parcel() {
     }
@@ -72,19 +72,19 @@ public class Parcel {
         this.zipCode = zipCode;
     }
 
-    public int getCurrent_ownerid() {
-        return current_ownerid;
+    public int getCurrentOwnerid() {
+        return currentOwnerid;
     }
 
-    public void setCurrent_ownerid(int current_ownerid) {
-        this.current_ownerid = current_ownerid;
+    public void setCurrentOwnerid(int currentOwnerid) {
+        this.currentOwnerid = currentOwnerid;
     }
 
-    public int getPrevious_ownerid() {
-        return previous_ownerid;
+    public int getPreviousOwnerid() {
+        return previousOwnerid;
     }
 
-    public void setPrevious_ownerid(int previous_ownerid) {
-        this.previous_ownerid = previous_ownerid;
+    public void setPreviousOwnerid(int previousOwnerid) {
+        this.previousOwnerid = previousOwnerid;
     }
 }

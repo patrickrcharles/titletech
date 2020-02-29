@@ -11,11 +11,11 @@ public class MainController {
 
     // create a mapping for "/hello"
 
-    @GetMapping("/hello")
+    @GetMapping("/")
     public String sayHello(Model theModel) {
 
         theModel.addAttribute("theDate", new java.util.Date());
 
-        return "helloworld";
+        return "home";
     }
 }

@@ -111,15 +111,15 @@ public class GenerateTestData3 {
 
             ParcelDocument parcelDocument = new ParcelDocument();
             parcelDocument.setId(p.getParcelDocumentid());
-            parcelDocument.setPrevious_ownerid(p.getPrevious_ownerid());
+            parcelDocument.setPreviousOwnerid(p.getPrevious_ownerid());
             parcelDocument.setParcelid(p.getParcelid());
             parcelDocument.setDatePurchased(p.getDatePurchased());
             parcelDocument.setDateSold(p.getDateSold());
-            parcelDocument.setCurrent_ownerid(p.getCurrent_ownerid());
-            parcelDocument.setPrevious_ownerid(p.getPrevious_ownerid());
+            parcelDocument.setCurrentOwnerid(p.getCurrent_ownerid());
+            parcelDocument.setPreviousOwnerid(p.getPrevious_ownerid());
 
-            parcelDocument.setCurrent_owner(p.getCurrent_owner());
-            parcelDocument.setPrevious_owner(p.getPrevious_owner());
+            parcelDocument.setCurrentOwner(p.getCurrent_owner());
+            parcelDocument.setPreviousOwner(p.getPrevious_owner());
 
             parcelDocumentList.add(parcelDocument);
         }
@@ -151,8 +151,8 @@ public class GenerateTestData3 {
 
             int parcelIdToUpdate = ownership.getParcelid();
 
-            parcelList.get(parcelIdToUpdate - 1).setCurrent_ownerid(ownership.getCurrent_ownerid());
-            parcelList.get(parcelIdToUpdate - 1).setPrevious_ownerid(ownership.getPrevious_ownerid());
+            parcelList.get(parcelIdToUpdate - 1).setCurrentOwnerid(ownership.getCurrent_ownerid());
+            parcelList.get(parcelIdToUpdate - 1).setPreviousOwnerid(ownership.getPrevious_ownerid());
         }
     }
 

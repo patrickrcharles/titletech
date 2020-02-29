@@ -23,19 +23,26 @@
         <thead class="thead-dark">
         <tr>
             <th>id</th>
-            <th>street</th>
-            <th>city</th>
-            <th>state</th>
+            <th>parcel id</th>
+            <th>date purchased</th>
+            <th>date sold</th>
+            <th>current owner id</th>
+            <th>previous owner id</th>
+            <th>current owner </th>
+            <th>previous owner </th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="tempParcel : ${parcels}">
-            <td th:text="${tempParcel.id}" />
-            <td th:text="${tempParcel.street}" />
-            <td th:text="${tempParcel.city}" />
-            <td th:text="${tempParcel.state}" />
-
+        <tr th:each="tempParceldocument : ${parceldocuments}">
+            <td th:text="${tempParceldocument.id}" />
+            <td th:text="${tempParceldocument.parcelid}" />
+            <td th:text="${tempParceldocument.datePurchased}" />
+            <td th:text="${tempParceldocument.dateSold}" />
+            <td th:text="${tempParceldocument.currentOwnerid}" />
+            <td th:text="${tempParceldocument.previousOwnerid}" />
+            <td th:text="${tempParceldocument.currentOwner}" />
+            <td th:text="${tempParceldocument.previousOwner}" />
         </tr>
         </tbody>
     </table>

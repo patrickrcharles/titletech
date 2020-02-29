@@ -71,10 +71,10 @@ public class InsertTestDataToDB {
                 statement.setInt(1, p.getParcelid());
                 statement.setString(2, p.getDatePurchased());
                 statement.setString(3, p.getDateSold());
-                statement.setInt(4, p.getCurrent_ownerid());
-                statement.setInt(5, p.getPrevious_ownerid());
-                statement.setString(6, p.getCurrent_owner());
-                statement.setString(7, p.getPrevious_owner());
+                statement.setInt(4, p.getCurrentOwnerid());
+                statement.setInt(5, p.getPreviousOwnerid());
+                statement.setString(6, p.getCurrentOwner());
+                statement.setString(7, p.getPreviousOwner());
 
                 int row = statement.executeUpdate();
                 if (row > 0) {
@@ -101,8 +101,8 @@ public class InsertTestDataToDB {
                 statement.setString(2, p.getCity());
                 statement.setString(3, p.getState());
                 statement.setString(4, p.getZipCode());
-                statement.setInt(5, p.getPrevious_ownerid());
-                statement.setInt(6, p.getCurrent_ownerid());
+                statement.setInt(5, p.getPreviousOwnerid());
+                statement.setInt(6, p.getCurrentOwnerid());
 
                 int row = statement.executeUpdate();
                 if (row > 0) {
