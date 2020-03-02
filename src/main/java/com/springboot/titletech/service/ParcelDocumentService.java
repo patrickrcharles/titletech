@@ -1,7 +1,7 @@
 package com.springboot.titletech.service;
 
 import com.springboot.titletech.entity.ParcelDocument;
-import com.springboot.titletech.repository.ParcelDocumentRepository;
+import com.springboot.titletech.dao.ParcelDocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

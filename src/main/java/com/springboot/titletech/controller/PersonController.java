@@ -1,9 +1,7 @@
 package com.springboot.titletech.controller;
 
-import com.springboot.titletech.entity.ParcelOwnership;
 import com.springboot.titletech.entity.Person;
-import com.springboot.titletech.repository.ParcelOwnershipRepository;
-import com.springboot.titletech.repository.PersonRepository;
+import com.springboot.titletech.dao.PersonRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

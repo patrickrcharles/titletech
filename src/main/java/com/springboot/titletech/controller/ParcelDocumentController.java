@@ -1,7 +1,7 @@
 package com.springboot.titletech.controller;
 
 import com.springboot.titletech.entity.ParcelDocument;
-import com.springboot.titletech.repository.ParcelDocumentRepository;
+import com.springboot.titletech.dao.ParcelDocumentRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
