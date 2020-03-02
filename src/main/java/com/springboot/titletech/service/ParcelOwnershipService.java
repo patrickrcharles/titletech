@@ -1,7 +1,7 @@
 package com.springboot.titletech.service;
 
 import com.springboot.titletech.entity.ParcelOwnership;
-import com.springboot.titletech.repository.ParcelOwnershipRepository;
+import com.springboot.titletech.dao.ParcelOwnershipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

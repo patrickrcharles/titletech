@@ -1,7 +1,6 @@
-package com.springboot.titletech.repository;
+package com.springboot.titletech.dao;
 
 import com.springboot.titletech.entity.ParcelDocument;
-import com.springboot.titletech.entity.Person;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -13,7 +12,6 @@ public class ParcelDocumentRepositoryImpl implements ParcelDocumentRepositoryCus
 
     @PersistenceContext
     EntityManager entityManager;
-
 
     @Override
     public List<ParcelDocument> findParcelDocumentsByParcelID(int parcelId) {

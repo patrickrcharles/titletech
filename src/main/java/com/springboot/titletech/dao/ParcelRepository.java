@@ -1,4 +1,4 @@
-package com.springboot.titletech.repository;
+package com.springboot.titletech.dao;
 
 import com.springboot.titletech.entity.Parcel;
 import org.springframework.data.jpa.repository.JpaRepository;

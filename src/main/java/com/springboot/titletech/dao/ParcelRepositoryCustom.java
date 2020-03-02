@@ -1,4 +1,4 @@
-package com.springboot.titletech.repository;
+package com.springboot.titletech.dao;
 
 import com.springboot.titletech.entity.ParcelOwnership;
 import com.springboot.titletech.entity.Person;

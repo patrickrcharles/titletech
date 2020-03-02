@@ -1,7 +1,7 @@
 package com.springboot.titletech.service;
 
 import com.springboot.titletech.entity.Person;
-import com.springboot.titletech.repository.PersonRepository;
+import com.springboot.titletech.dao.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
