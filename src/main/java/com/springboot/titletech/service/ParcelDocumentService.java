@@ -10,11 +10,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-public class ParcelDocumentServiceJpa {
+public class ParcelDocumentService {
     private ParcelDocumentRepository parcelDocumentRepository;
 
     @Autowired
-    public ParcelDocumentServiceJpa(ParcelDocumentRepository theParcelDocumentService) {
+    public ParcelDocumentService(ParcelDocumentRepository theParcelDocumentService) {
         parcelDocumentRepository = theParcelDocumentService;
     }
 

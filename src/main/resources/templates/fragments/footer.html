@@ -8,10 +8,9 @@
 </head>
 <body>
 <div th:fragment="footer">
-
     <div class="container">
-
         <footer>
+            <hr>
             <!-- this is footer -->
             &copy; 2020 Patrick Charles
             <span sec:authorize="isAuthenticated()">
@@ -19,10 +18,8 @@
                 Roles: <span sec:authentication="principal.authorities"></span> |
                 <a th:href="@{/logout}">Sign Out</a>
             </span>
-            
         </footer>
     </div>
-
 </div>
 </body>
 </html>

@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class ParcelServiceJpa {
+public class ParcelService {
 
     @Autowired
     private ParcelRepository parcelRepository;
