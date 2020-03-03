@@ -4,13 +4,35 @@
 <script th:inline="javascript">
 /*<![CDATA[*/
     var sortdirection = /*[[${order}]]*/ 'default';
-    console.log(sortdirection)
 /*]]>*/
 
-function getIdUrl() {
+function sortParcelById() {
   if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
   else{ document.location='/parcel/list?sortby=id&order=asc'}}
 
+function sortParcelByStreet() {
+  if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
+  else{ document.location='/parcel/list?sortby=street&order=asc'}}
+
+function sortParcelByCity() {
+  if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
+  else{ document.location='/parcel/list?sortby=city&order=asc'}}
+
+function sortParcelByState() {
+  if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
+  else{ document.location='/parcel/list?sortby=state&order=asc'}}
+
+function sortParcelByZipcode() {
+  if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
+  else{ document.location='/parcel/list?sortby=zipCode&order=asc'}}
+
+function sortParcelByCurrentOwnerid() {
+  if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
+  else{ document.location='/parcel/list?sortby=currentOwnerid&order=asc'}}
+
+function sortParcelByPreviousOwnerid() {
+  if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
+  else{ document.location='/parcel/list?sortby=previousOwnerid&order=asc'}}
 </script>
 
 <head>
@@ -38,16 +60,13 @@ function getIdUrl() {
 
         <thead class="thead-dark">
         <tr>
-            <th onclick="getIdUrl()" style="cursor:hand">id</th>
-            <th onclick="document.location='/parcel/list?sortby=street'" style="cursor:hand">street</th>
-            <th onclick="document.location='/parcel/list?sortby=city'" style="cursor:hand">city</th>
-            <th onclick="document.location='/parcel/list?sortby=state'" style="cursor:hand">state</th>
-            <th onclick="document.location='/parcel/list?sortby=zipCode'" style="cursor:hand">zip code</th>
-            <th onclick="document.location='/parcel/list?sortby=currentOwnerid'" style="cursor:hand">current owner id
-            </th>
-            <th onclick="document.location='/parcel/list?sortby=previousOwnerid'" style="cursor:hand">previous owner
-                id
-            </th>
+            <th onclick="sortParcelById()" style="cursor:hand">id</th>
+            <th onclick="sortParcelByStreet()" style="cursor:hand">street</th>
+            <th onclick="sortParcelByCity()" style="cursor:hand">city</th>
+            <th onclick="sortParcelByState()" style="cursor:hand">state</th>
+            <th onclick="sortParcelByZipcode()" style="cursor:hand">zip code</th>
+            <th onclick="sortParcelByCurrentOwnerid()" style="cursor:hand">current owner id
+            <th onclick="sortParcelByPreviousOwnerid()" style="cursor:hand">previous owner id</th>
         </tr>
         </thead>
 
