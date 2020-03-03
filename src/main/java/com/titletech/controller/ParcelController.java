@@ -30,8 +30,7 @@ public class ParcelController {
                                     @RequestParam String sortBy){
 
             // get employees from db
-            List<Parcel> theParcels = parcelRepository.findAll(Sort.by( sortBy));
-
+            List<Parcel> theParcels = parcelRepository.findAll(Sort.by(sortBy));
 
             // add to the spring model
             theModel.addAttribute("parcels", theParcels);
