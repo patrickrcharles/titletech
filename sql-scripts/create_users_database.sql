@@ -25,8 +25,8 @@ CREATE TABLE `users` (
 -- Default passwords here are: fun123
 --
 
-INSERT INTO `users`
-VALUES
+INSERT INTO `users` 
+VALUES 
 ('john','{bcrypt}$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K',1),
 ('mary','{bcrypt}$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K',1),
 ('susan','{bcrypt}$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K',1);
@@ -48,8 +48,8 @@ CREATE TABLE `authorities` (
 -- Dumping data for table `authorities`
 --
 
-INSERT INTO `authorities`
-VALUES
+INSERT INTO `authorities` 
+VALUES 
 ('john','ROLE_EMPLOYEE'),
 ('mary','ROLE_EMPLOYEE'),
 ('mary','ROLE_MANAGER'),
