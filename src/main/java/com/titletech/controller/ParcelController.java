@@ -27,13 +27,19 @@ public class ParcelController {
 
         @GetMapping("/list")
         public String listParcels(Model theModel,
-                                    @RequestParam String sortBy){
+                                  @RequestParam String sortby,
+                                  @RequestParam String order){
 
-            // get employees from db
-            List<Parcel> theParcels = parcelRepository.findAll(Sort.by(sortBy));
+            //todo: figure out how to send sort direction as a paramter withou having to change entity
+
+            System.out.println("paramter.direction :: " + order.toString());
+            Sort.Direction sortDirection = Sort.Direction.fromString(order);
+
+            List<Parcel> theParcels = parcelRepository.findAll(Sort.by(sortDirection, sortby));
 
             // add to the spring model
             theModel.addAttribute("parcels", theParcels);
+            theModel.addAttribute("order", sortDirection);
 
             return "parcel/list-parcels";
         }

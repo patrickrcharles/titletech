@@ -1,13 +1,26 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<script th:inline="javascript">
+/*<![CDATA[*/
+    var sortdirection = /*[[${order}]]*/ 'default';
+    console.log(sortdirection)
+/*]]>*/
+
+function getIdUrl() {
+  if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
+  else{ document.location='/parcel/list?sortby=id&order=asc'}}
+
+</script>
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <title>Parcel Directory</title>
 </head>
@@ -24,27 +37,29 @@
     <table class="table table-bordered table-striped">
 
         <thead class="thead-dark">
-
         <tr>
-            <th onclick="document.location='/parcel/list?sortBy=id'" style="cursor:hand">id</th>
-            <th onclick="document.location='/parcel/list?sortBy=street'" style="cursor:hand">street</th>
-            <th onclick="document.location='/parcel/list?sortBy=city'" style="cursor:hand">city</th>
-            <th onclick="document.location='/parcel/list?sortBy=state'" style="cursor:hand" >state</th>
-            <th onclick="document.location='/parcel/list?sortBy=zipCode'" style="cursor:hand" >zip code</th>
-            <th onclick="document.location='/parcel/list?sortBy=currentOwnerid'" style="cursor:hand" >current owner id</th>
-            <th onclick="document.location='/parcel/list?sortBy=previousOwnerid'" style="cursor:hand" >previous owner id</th>
+            <th onclick="getIdUrl()" style="cursor:hand">id</th>
+            <th onclick="document.location='/parcel/list?sortby=street'" style="cursor:hand">street</th>
+            <th onclick="document.location='/parcel/list?sortby=city'" style="cursor:hand">city</th>
+            <th onclick="document.location='/parcel/list?sortby=state'" style="cursor:hand">state</th>
+            <th onclick="document.location='/parcel/list?sortby=zipCode'" style="cursor:hand">zip code</th>
+            <th onclick="document.location='/parcel/list?sortby=currentOwnerid'" style="cursor:hand">current owner id
+            </th>
+            <th onclick="document.location='/parcel/list?sortby=previousOwnerid'" style="cursor:hand">previous owner
+                id
+            </th>
         </tr>
         </thead>
 
         <tbody>
         <tr th:each="tempParcel : ${parcels}">
-            <td th:text="${tempParcel.id}" />
-            <td th:text="${tempParcel.street}" />
-            <td th:text="${tempParcel.city}" />
-            <td th:text="${tempParcel.state}" />
-            <td th:text="${tempParcel.zipCode}" />
-            <td th:text="${tempParcel.currentOwnerid}" />
-            <td th:text="${tempParcel.previousOwnerid}" />
+            <td th:text="${tempParcel.id}"/>
+            <td th:text="${tempParcel.street}"/>
+            <td th:text="${tempParcel.city}"/>
+            <td th:text="${tempParcel.state}"/>
+            <td th:text="${tempParcel.zipCode}"/>
+            <td th:text="${tempParcel.currentOwnerid}"/>
+            <td th:text="${tempParcel.previousOwnerid}"/>
 
         </tr>
         </tbody>

@@ -21,10 +21,6 @@ public class ParcelService {
 
     @GetMapping("/parcel")
     public List<Parcel> retrieveAllParcels() {
-        System.out.print("\n*********** id::: " + parcelRepository.findAll().get(0).getId());
-        System.out.print("\n*********** street ::: " + parcelRepository.findAll().get(0).getStreet());
-        System.out.print("\n*********** city ::: " + parcelRepository.findAll().get(0).getCity());
-        System.out.print("\n*********** state ::: " + parcelRepository.findAll().get(0).getState());
         return parcelRepository.findAll();
     }
 
