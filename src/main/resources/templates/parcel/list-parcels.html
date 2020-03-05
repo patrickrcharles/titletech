@@ -1,41 +1,8 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<script th:inline="javascript">
-/*<![CDATA[*/
-    var sortdirection = /*[[${order}]]*/ 'default';
-/*]]>*/
-
-function sortParcelById() {
-  if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
-  else{ document.location='/parcel/list?sortby=id&order=asc'}}
-
-function sortParcelByStreet() {
-  if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
-  else{ document.location='/parcel/list?sortby=street&order=asc'}}
-
-function sortParcelByCity() {
-  if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
-  else{ document.location='/parcel/list?sortby=city&order=asc'}}
-
-function sortParcelByState() {
-  if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
-  else{ document.location='/parcel/list?sortby=state&order=asc'}}
-
-function sortParcelByZipcode() {
-  if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
-  else{ document.location='/parcel/list?sortby=zipCode&order=asc'}}
-
-function sortParcelByCurrentOwnerid() {
-  if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
-  else{ document.location='/parcel/list?sortby=currentOwnerid&order=asc'}}
-
-function sortParcelByPreviousOwnerid() {
-  if (sortdirection =="ASC") { document.location='/parcel/list?sortby=id&order=desc' }
-  else{ document.location='/parcel/list?sortby=previousOwnerid&order=asc'}}
-</script>
-
 <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -45,10 +12,12 @@ function sortParcelByPreviousOwnerid() {
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <title>Parcel Directory</title>
+
+    <!--    <script th:src="@{/static/js/sortTableLists.js}" type='text/javascript' />-->
+
 </head>
 
 <body>
-
 <div class="container">
 
     <h3>Parcels</h3>
@@ -60,13 +29,13 @@ function sortParcelByPreviousOwnerid() {
 
         <thead class="thead-dark">
         <tr>
-            <th onclick="sortParcelById()" style="cursor:hand">id</th>
-            <th onclick="sortParcelByStreet()" style="cursor:hand">street</th>
-            <th onclick="sortParcelByCity()" style="cursor:hand">city</th>
-            <th onclick="sortParcelByState()" style="cursor:hand">state</th>
-            <th onclick="sortParcelByZipcode()" style="cursor:hand">zip code</th>
-            <th onclick="sortParcelByCurrentOwnerid()" style="cursor:hand">current owner id
-            <th onclick="sortParcelByPreviousOwnerid()" style="cursor:hand">previous owner id</th>
+            <th onclick="sort(this.id)" id="id" style="cursor:hand">id</th>
+            <th onclick="sort(this.id)" id="street" style="cursor:hand">street</th>
+            <th onclick="sort(this.id)" id="city" style="cursor:hand">city</th>
+            <th onclick="sort(this.id)" id="state" style="cursor:hand">state</th>
+            <th onclick="sort(this.id)"  id="zipCode" style="cursor:hand">zip code</th>
+            <th onclick="sort(this.id)" id="currentOwnerid" style="cursor:hand">current owner id
+            <th onclick="sort(this.id)" id="previousOwnerid" style="cursor:hand">previous owner id</th>
         </tr>
         </thead>
 
@@ -85,6 +54,20 @@ function sortParcelByPreviousOwnerid() {
     </table>
 </div>
 
+<script th:inline="javascript">
+
+<!--get order parameter value from model-->
+    /*<![CDATA[*/
+    var sortdirection = /*[[${order}]]*/ 'default';
+    /*]]>*/
+    console.log("sortdirection : " + sortdirection);
+
+   function sort(value) {
+    if (sortdirection =="ASC") { document.location='/parcel/list?sortby='+value+'&order=desc' }
+    else{ document.location='/parcel/list?sortby='+ value + '&order=asc'}
+    }
+
+</script>
 </body>
 </html>
 
