@@ -24,14 +24,15 @@
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
-            <th>id</th>
-            <th>parcel id</th>
-            <th>first name</th>
-            <th>middle name</th>
-            <th>last name </th>
-            <th>date purchased</th>
-            <th>date sold</th>
-            <th>is current owner</th>
+            <th onclick="sort(this.id)" id="id" style="cursor:hand">id</th>
+            <th onclick="sort(this.id)" id="parcelid" style="cursor:hand">parcel id</th>
+            <th onclick="sort(this.id)" id="firstName" style="cursor:hand" >first name</th>
+            <th onclick="sort(this.id)" id="middleName" style="cursor:hand">middle name</th>
+            <th onclick="sort(this.id)" id="lastName" style="cursor:hand">last name</th>
+            <th onclick="sort(this.id)" id="datePurchased"  style="cursor:hand">date purchased</th>
+            <th onclick="sort(this.id)" id="dateSold" style="cursor:hand">date sold </th>
+            <th onclick="sort(this.id)" id="isCurrentOwner" style="cursor:hand">is current owner</th>
+
         </tr>
         </thead>
 
@@ -49,6 +50,19 @@
         </tbody>
     </table>
 </div>
+<script th:inline="javascript">
+
+<!--get order parameter value from model-->
+    /*<![CDATA[*/
+    var sortdirection = /*[[${order}]]*/ 'default';
+    /*]]>*/
+    console.log("sortdirection : " + sortdirection);
+
+   function sort(value) {
+    if (sortdirection =="ASC") { document.location='/person/list?sortby='+value+'&order=desc' }
+    else{ document.location='/person/list?sortby='+ value + '&order=asc'}
+    }
+</script>
 
 </body>
 </html>
