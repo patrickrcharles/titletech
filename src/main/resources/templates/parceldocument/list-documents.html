@@ -23,14 +23,14 @@
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
-            <th onclick="sort(this.id)" id="id" style="cursor:hand">id</th>
-            <th onclick="sort(this.id)" id="parcelid" style="cursor:hand">parcel id</th>
-            <th onclick="sort(this.id)" id="datePurchased" style="cursor:hand" >date purchased</th>
-            <th onclick="sort(this.id)" id="dateSold" style="cursor:hand">date sold</th>
-            <th onclick="sort(this.id)" id="currentOwnerid" style="cursor:hand">current owner id</th>
-            <th onclick="sort(this.id)" id="previousOwnerid"  style="cursor:hand">previous owner id</th>
-            <th onclick="sort(this.id)" id="currentOwner" style="cursor:hand">current owner </th>
-            <th onclick="sort(this.id)" id="previousOwner" style="cursor:hand">previous owner </th>
+            <th onclick="sortParcelDocument(this.id, sortdirection)" id="id" style="cursor:hand">id</th>
+            <th onclick="sortParcelDocument(this.id, sortdirection)" id="parcelid" style="cursor:hand">parcel id</th>
+            <th onclick="sortParcelDocument(this.id, sortdirection)" id="datePurchased" style="cursor:hand" >date purchased</th>
+            <th onclick="sortParcelDocument(this.id, sortdirection)" id="dateSold" style="cursor:hand">date sold</th>
+            <th onclick="sortParcelDocument(this.id, sortdirection)" id="currentOwnerid" style="cursor:hand">current owner id</th>
+            <th onclick="sortParcelDocument(this.id, sortdirection)" id="previousOwnerid"  style="cursor:hand">previous owner id</th>
+            <th onclick="sortParcelDocument(this.id, sortdirection)" id="currentOwner" style="cursor:hand">current owner </th>
+            <th onclick="sortParcelDocument(this.id, sortdirection)" id="previousOwner" style="cursor:hand">previous owner </th>
         </tr>
         </thead>
 
@@ -49,18 +49,12 @@
     </table>
 </div>
 
+<script th:src="@{/static/js/util.js}" type='text/javascript' ></script>
 <script th:inline="javascript">
-
 <!--get order parameter value from model-->
     /*<![CDATA[*/
     var sortdirection = /*[[${order}]]*/ 'default';
     /*]]>*/
-    console.log("sortdirection : " + sortdirection);
-
-   function sort(value) {
-    if (sortdirection =="ASC") { document.location='/parceldocument/list?sortby='+value+'&order=desc' }
-    else{ document.location='/parceldocument/list?sortby='+ value + '&order=asc'}
-    }
 </script>
 
 </body>

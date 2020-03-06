@@ -10,10 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
     <title>Parcel Directory</title>
-
-    <!--    <script th:src="@{/static/js/sortTableLists.js}" type='text/javascript' />-->
 
 </head>
 
@@ -28,13 +25,13 @@
 
         <thead class="thead-dark">
         <tr>
-            <th onclick="sort(this.id)" id="id" style="cursor:hand">id</th>
-            <th onclick="sort(this.id)" id="street" style="cursor:hand">street</th>
-            <th onclick="sort(this.id)" id="city" style="cursor:hand">city</th>
-            <th onclick="sort(this.id)" id="state" style="cursor:hand">state</th>
-            <th onclick="sort(this.id)"  id="zipCode" style="cursor:hand">zip code</th>
-            <th onclick="sort(this.id)" id="currentOwnerid" style="cursor:hand">current owner id
-            <th onclick="sort(this.id)" id="previousOwnerid" style="cursor:hand">previous owner id</th>
+            <th onclick="sortParcel(this.id, sortdirection)" id="id" style="cursor:hand">id</th>
+            <th onclick="sortParcel(this.id, sortdirection)" id="street" style="cursor:hand">street</th>
+            <th onclick="sortParcel(this.id, sortdirection)" id="city" style="cursor:hand">city</th>
+            <th onclick="sortParcel(this.id, sortdirection)" id="state" style="cursor:hand">state</th>
+            <th onclick="sortParcel(this.id, sortdirection)"  id="zipCode" style="cursor:hand">zip code</th>
+            <th onclick="sortParcel(this.id, sortdirection)" id="currentOwnerid" style="cursor:hand">current owner id
+            <th onclick="sortParcel(this.id, sortdirection)" id="previousOwnerid" style="cursor:hand">previous owner id</th>
         </tr>
         </thead>
 
@@ -53,20 +50,14 @@
     </table>
 </div>
 
+<script th:src="@{/static/js/util.js}" type='text/javascript' ></script>
 <script th:inline="javascript">
-
 <!--get order parameter value from model-->
     /*<![CDATA[*/
     var sortdirection = /*[[${order}]]*/ 'default';
     /*]]>*/
-    console.log("sortdirection : " + sortdirection);
-
-   function sort(value) {
-    if (sortdirection =="ASC") { document.location='/parcel/list?sortby='+value+'&order=desc' }
-    else{ document.location='/parcel/list?sortby='+ value + '&order=asc'}
-    }
-
 </script>
+
 </body>
 </html>
 

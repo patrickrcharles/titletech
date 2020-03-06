@@ -22,15 +22,15 @@
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
-            <th>id</th>
-            <th>parcel id</th>
-            <th>current owner id</th>
-            <th>previous owner id</th>
-            <th>current owner </th>
-            <th>previous owner </th>
-            <th>parcel document id</th>
-            <th>date purchased</th>
-            <th>date sold</th>
+            <th onclick="sortParcelOwnership(this.id, sortdirection)" id="id" style="cursor:hand">id</th>
+            <th onclick="sortParcelOwnership(this.id, sortdirection)" id="parcelid" style="cursor:hand">parcel id</th>
+            <th onclick="sortParcelOwnership(this.id, sortdirection)" id="currentOwnerid" style="cursor:hand">current owner id</th>
+            <th onclick="sortParcelOwnership(this.id, sortdirection)" id="previousOwnerid"  style="cursor:hand">previous owner id</th>
+            <th onclick="sortParcelOwnership(this.id, sortdirection)" id="currentOwner" style="cursor:hand">current owner </th>
+            <th onclick="sortParcelOwnership(this.id, sortdirection)" id="previousOwner" style="cursor:hand">previous owner </th>
+            <th onclick="sortParcelOwnership(this.id, sortdirection)" id="parcelDocumentid" style="cursor:hand">parcel docucument id </th>
+            <th onclick="sortParcelOwnership(this.id, sortdirection)" id="datePurchased" style="cursor:hand" >date purchased</th>
+            <th onclick="sortParcelOwnership(this.id, sortdirection)" id="dateSold" style="cursor:hand">date sold</th>
         </tr>
         </thead>
 
@@ -49,7 +49,13 @@
         </tbody>
     </table>
 </div>
-
+<script th:src="@{/static/js/util.js}" type='text/javascript' ></script>
+<script th:inline="javascript">
+<!--get order parameter value from model-->
+    /*<![CDATA[*/
+    var sortdirection = /*[[${order}]]*/ 'default';
+    /*]]>*/
+</script>
 </body>
 </html>
 
