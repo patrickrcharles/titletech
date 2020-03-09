@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GetEntityObjectFromDatabase {
     // database connect info
-    private final static String url = "jdbc:mysql://localhost/title-ownership?useSSL=false";
+    private final static String url = "jdbc:mysql://localhost/titletech-ownership?useSSL=false";
     private final static String user = "root";
     private final static String password = "admin";
 

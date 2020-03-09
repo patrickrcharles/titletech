@@ -15,7 +15,7 @@ import java.util.List;
 public class InsertTestDataToDB {
 
     // database connect info
-    protected static String url = "jdbc:mysql://localhost/title-ownership?useSSL=false";
+    protected static String url = "jdbc:mysql://localhost/titletech-ownership?useSSL=false";
     protected static String user = "root";
     protected static String password = "admin";
 
