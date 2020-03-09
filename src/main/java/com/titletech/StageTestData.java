@@ -21,8 +21,6 @@ public class StageTestData {
 
     public static void main(String[] args) throws java.text.ParseException, SQLException {
 
-
-        int numToGenerate = 5;
         // parcel data
         ArrayList<Parcel> parcelList = new ArrayList<>();
         //parcel document data
@@ -49,9 +47,9 @@ public class StageTestData {
         InsertTestDataToDB.InsertParcelDocumentToDB(parcelDocumentsList);
         InsertTestDataToDB.InsertParcelOwnershipToDB(parcelOwnershipList);
 
-        List<Person> ppl = GetEntityObjectFromDatabase.getPersonObject();
-        List<Parcel> parcels = GetEntityObjectFromDatabase.getParcelObject();
-        List<ParcelDocument> parcelDocuments = GetEntityObjectFromDatabase.getParcelDocumentObject();
+//        List<Person> ppl = GetEntityObjectFromDatabase.getPersonObject();
+//        List<Parcel> parcels = GetEntityObjectFromDatabase.getParcelObject();
+//        List<ParcelDocument> parcelDocuments = GetEntityObjectFromDatabase.getParcelDocumentObject();
 
         //add method to remove/cleanup test data from database
     }
