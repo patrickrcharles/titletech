@@ -1,43 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `title-ownership`;
-USE `title-ownership`;
-
-SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE IF EXISTS `users`;
-SET FOREIGN_KEY_CHECKS = 1;
-
-CREATE  TABLE `users` (
-  `username` VARCHAR(45) NOT NULL ,
-  `password` VARCHAR(45) NOT NULL ,
-  `enabled` TINYINT NOT NULL DEFAULT 1 ,
-  PRIMARY KEY (username));
-
-SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE IF EXISTS `user_roles`;
-SET FOREIGN_KEY_CHECKS = 1;
-
-CREATE TABLE `user_roles` (
-  `user_role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) NOT NULL,
-  `role` varchar(45) NOT NULL,
-  PRIMARY KEY (user_role_id),
-  UNIQUE KEY uni_username_role (role,username),
-  KEY fk_username_idx (username),
-  CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users (username));
-  
-  INSERT INTO users(username, password, enabled)
-	VALUES ('patrick','123456', 1);
-    
-INSERT INTO users(username, password, enabled)
-	VALUES ('alex','123456', 1);
-    
-INSERT INTO user_roles (username, role)
-	VALUES ('patrick', 'USER');
-    
-INSERT INTO user_roles (username, role)
-	VALUES ('patrick', 'ADMIN');
-    
-INSERT INTO user_roles (username, role)
-	VALUES ('alex', 'USER');
+CREATE DATABASE  IF NOT EXISTS `titletech-ownership`;
+USE `titletech-ownership`;
 
 DROP TABLE IF EXISTS `person`;
 
